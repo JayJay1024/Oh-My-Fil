@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { stat } from 'fs';
 import { Client } from 'rpc-websockets';
 
 import { RootState } from '../index';

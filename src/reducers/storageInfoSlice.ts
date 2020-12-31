@@ -4,23 +4,28 @@ import { Client } from 'rpc-websockets';
 import { RootState } from '../index';
 import { ConnectInfoState } from './connectInfoSlice';
 
-type StorageStatState = object;
+type StorageInfoState = object;
 
 const initialState = {
-  "Capacity": 106016318423040,
-  "Available": 23399262846976,
-  "Reserved": 0
-} as StorageStatState;
+  "ID": "9921d275-fa30-4e02-81b4-c05a349e0bb4",
+  "Path": "/data-2/store",
+  "URLs": [
+      "http://192.168.1.190:2321/remote"
+  ],
+  "Weight": 10,
+  "CanSeal": false,
+  "CanStore": false
+} as StorageInfoState;
 
 interface fetchParams {
   connectInfo: ConnectInfoState,
   storageId: string
 }
 
-const fetchStorageStat = createAsyncThunk(
+const fetchStorageInfo = createAsyncThunk(
   'storage/stat',
   async (params: fetchParams) => {
-    return new Promise<StorageStatState>((resolve, rejects) => {
+    return new Promise<StorageInfoState>((resolve, rejects) => {
       const nodeMiner = new Client(`ws://${params.connectInfo.minerApi}/rpc/v0?token=${params.connectInfo.minerToken}`);
 
       nodeMiner.on('error', async () => {
@@ -29,34 +34,34 @@ const fetchStorageStat = createAsyncThunk(
       nodeMiner.on('close', () => { });
 
       nodeMiner.on("open", async () => {
-        const storageStat = await nodeMiner.call('Filecoin.StorageStat', [ params.storageId ]) as StorageStatState;
+        const storageInfo = await nodeMiner.call('Filecoin.StorageInfo', [ params.storageId ]) as StorageInfoState;
         nodeMiner.close();
-        resolve(storageStat);
+        resolve(storageInfo);
       });
     });
   }
 );
 
 const slice = createSlice({
-  name: 'storageStat',
+  name: 'storageInfo',
   initialState: initialState,
   reducers: {
-    updateStorageStat(state, action: PayloadAction<StorageStatState>) {
+    updateStorageInfo(state, action: PayloadAction<StorageInfoState>) {
       void(state);
       return action.payload;
     }
   },
   extraReducers: builder => {
-    builder.addCase(fetchStorageStat.fulfilled, (state, action) => {
+    builder.addCase(fetchStorageInfo.fulfilled, (state, action) => {
       void(state);
       return action.payload;
     });
   }
 });
 
-export { fetchStorageStat };
-export const { updateStorageStat } = slice.actions;
-export const selectStorageStat = (state: RootState) => state.storageStat;
+export { fetchStorageInfo };
+export const { updateStorageInfo } = slice.actions;
+export const selectStorageInfo = (state: RootState) => state.storageInfo;
 
 export default slice.reducer;
 
