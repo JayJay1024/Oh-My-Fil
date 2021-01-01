@@ -4,7 +4,9 @@ import { Client } from 'rpc-websockets';
 import { RootState } from '../index';
 import { ConnectInfoState } from './connectInfoSlice';
 
-type SectorsSummaryState = object;
+interface SectorsSummaryState {
+  [index: string]: number
+};
 
 const initialState = {
   CommitFailed: 15,

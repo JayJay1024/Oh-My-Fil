@@ -2,15 +2,14 @@ import { FC, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import './App.less';
 
-import { Layout, Menu, Modal, Input, Divider } from "antd";
-import { UserOutlined } from '@ant-design/icons';
+import { Layout, Menu, Modal, Input, Card, Divider, Typography, Button } from "antd";
+import { UserOutlined, ReloadOutlined } from '@ant-design/icons';
 
 import {
   updateLotusApi,
   updateMinerApi,
   updateLotusToken,
   updateMinerToken,
-
   selectConnectInfo,
 } from './reducers/connectInfoSlice';
 
@@ -19,14 +18,21 @@ import {
   selectActorInfo,
 } from './reducers/actorInfoSlice';
 
+import {
+  fetchSectorsSummary,
+  selectSectorsSummary,
+} from './reducers/sectorsSummarySlice';
+
 const { Header, Content, Footer } = Layout;
 
 const App: FC = () => {
   const dispatch = useDispatch()
-  const actorInfo = useSelector(selectActorInfo);
-  const connectInfo = useSelector(selectConnectInfo);
 
-  const [visibleConnectInfoModal, setVisibleConnectInfoModal] = useState<boolean>(true);
+  const connectInfo = useSelector(selectConnectInfo);
+  const actorInfo = useSelector(selectActorInfo);
+  const sectorsSummary = useSelector(selectSectorsSummary);
+
+  const [visibleConnectInfoModal, setVisibleConnectInfoModal] = useState<boolean>(false);
 
   const handleClickMenu = (e: any) => {
     console.log(e.key)
@@ -71,7 +77,15 @@ const App: FC = () => {
           <Input allowClear={true} defaultValue={connectInfo.lotusToken} onChange={handleChangeLotusToken} className='my-fil-node-info-button' placeholder='lotus token' />
           <Input allowClear={true} defaultValue={connectInfo.minerToken} onChange={handleChangeMinerToken} className='my-fil-node-info-button' placeholder='miner token' />
         </Modal>
-        Content
+        <Card title={<Button type='dashed' icon={<ReloadOutlined />} onClick={() => dispatch(fetchSectorsSummary(connectInfo))}>Sectors Summary</Button>}
+          bordered={true} size='small' style={{ width: '200px' }}
+        >
+          {Object.keys(sectorsSummary).map((key: string) => {
+            return <span key={key}>
+              <Typography.Text>{key}: {sectorsSummary[key]}</Typography.Text><br/>
+            </span>
+          })}
+        </Card>
       </Content>
       <Footer className='my-fil-footer'>
         My Fil ©2020 Created by Jay
