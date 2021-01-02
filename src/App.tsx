@@ -116,28 +116,61 @@ const App: FC = () => {
           hoverable={true} bordered={false} size='small' className='my-fil-home-card' loading={false}
         >
           {Object.keys(sectorsSummary).map((key: string) => {
-            return <span key={key}>
-              <Typography.Text>{key}: {sectorsSummary[key]}</Typography.Text><br/>
-            </span>
+            return (
+              <div className='my-fil-home-card-item' key={key}>
+                <div>{key}:</div>
+                <div>{sectorsSummary[key]}</div>
+              </div>
+            )
           })}
         </Card>
         <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerPower}>Miner Power</Button>}
           hoverable={true} bordered={false} size='small' className='my-fil-home-card' loading={false}
         >
-          <span>Live - Active: {bytes((sectorCount.Live-sectorCount.Active)*actorInfo.actorSectorSize)}</span><br/>
-          <span>Live   Power: {bytes(sectorCount.Live*actorInfo.actorSectorSize)}</span><br/>
-          <span>Active Power: {bytes(sectorCount.Active*actorInfo.actorSectorSize)}</span><br/>
-          <span>Faulty Power: {bytes(sectorCount.Faulty*actorInfo.actorSectorSize)}</span><br/>
-          <span>Recoveries Power: {bytes(minerRecoveries.data[0]*actorInfo.actorSectorSize)}</span><br/>
+          <div className='my-fil-home-card-item'>
+            <div>Live - Active:</div>
+            <div>{bytes((sectorCount.Live-sectorCount.Active)*actorInfo.actorSectorSize)}</div>
+          </div>
+          <div className='my-fil-home-card-item'>
+            <div>Live   Power:</div>
+            <div>{bytes(sectorCount.Live*actorInfo.actorSectorSize)}</div>
+          </div>
+          <div className='my-fil-home-card-item'>
+            <div>Active Power:</div>
+            <div>{bytes(sectorCount.Active*actorInfo.actorSectorSize)}</div>
+          </div>
+          <div className='my-fil-home-card-item'>
+            <div>Faulty Power:</div>
+            <div>{bytes(sectorCount.Faulty*actorInfo.actorSectorSize)}</div>
+          </div>
+          <div className='my-fil-home-card-item'>
+            <div>Recoveries Power:</div>
+            <div>{bytes(minerRecoveries.data[0]*actorInfo.actorSectorSize)}</div>
+          </div>
         </Card>
         <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerBalance}>Miner Balance</Button>}
           hoverable={true} bordered={false} size='small' className='my-fil-home-card' loading={actorState.status==='loading'||minerAvailableBalance.status==='loading'?true:false}
         >
-          <span>Total: {nano2fil(actorState.data.Balance)} FIL</span><br/>
-          <span>PreCommit: {nano2fil(actorState.data.State.PreCommitDeposits)} FIL</span><br/>
-          <span>Pledge: {nano2fil(actorState.data.State.InitialPledge)} FIL</span><br/>
-          <span>Vesting: {nano2fil(actorState.data.State.LockedFunds)} FIL</span><br/>
-          <span>Available: {nano2fil(minerAvailableBalance.data)} FIL</span><br/>
+          <div className='my-fil-home-card-item'>
+            <div>Total:</div>
+            <div>{nano2fil(actorState.data.Balance)} FIL</div>
+          </div>
+          <div className='my-fil-home-card-item'>
+            <div>PreCommit:</div>
+            <div>{nano2fil(actorState.data.State.PreCommitDeposits)} FIL</div>
+          </div>
+          <div className='my-fil-home-card-item'>
+            <div>Pledge:</div>
+            <div>{nano2fil(actorState.data.State.InitialPledge)} FIL</div>
+          </div>
+          <div className='my-fil-home-card-item'>
+            <div>Vesting:</div>
+            <div>{nano2fil(actorState.data.State.LockedFunds)} FIL</div>
+          </div>
+          <div className='my-fil-home-card-item'>
+            <div>Available:</div>
+            <div>{nano2fil(minerAvailableBalance.data)} FIL</div>
+          </div>
         </Card>
       </Content>
       <Footer className='my-fil-footer'>
