@@ -112,8 +112,8 @@ const App: FC = () => {
           <Input allowClear={true} defaultValue={connectInfo.lotusToken} onChange={handleChangeLotusToken} className='my-fil-node-info-button' placeholder='lotus token' />
           <Input allowClear={true} defaultValue={connectInfo.minerToken} onChange={handleChangeMinerToken} className='my-fil-node-info-button' placeholder='miner token' />
         </Modal>
-        <Card title={<Button type='dashed' icon={<ReloadOutlined />} onClick={() => dispatch(fetchSectorsSummary(connectInfo))}>Sectors Summary</Button>}
-          bordered={true} size='small' style={{ width: '200px' }}
+        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchSectorsSummary(connectInfo))}>Sectors Summary</Button>}
+          bordered={false} size='small' className='my-fil-home-card'
         >
           {Object.keys(sectorsSummary).map((key: string) => {
             return <span key={key}>
@@ -121,8 +121,8 @@ const App: FC = () => {
             </span>
           })}
         </Card>
-        <Card title={<Button type='dashed' icon={<ReloadOutlined />} onClick={handleClickMinerPower}>Miner Power</Button>}
-          bordered={true} size='small' style={{ width: '200px' }}
+        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerPower}>Miner Power</Button>}
+          bordered={false} size='small' className='my-fil-home-card'
         >
           <span>Live - Active: {bytes((sectorCount.Live-sectorCount.Active)*actorInfo.actorSectorSize)}</span><br/>
           <span>Live   Power: {bytes(sectorCount.Live*actorInfo.actorSectorSize)}</span><br/>
@@ -130,8 +130,8 @@ const App: FC = () => {
           <span>Faulty Power: {bytes(sectorCount.Faulty*actorInfo.actorSectorSize)}</span><br/>
           <span>Recoveries Power: {bytes(minerRecoveries.data[0]*actorInfo.actorSectorSize)}</span><br/>
         </Card>
-        <Card title={<Button type='dashed' icon={<ReloadOutlined />} onClick={handleClickMinerBalance}>Miner Balance</Button>}
-          bordered={true} size='small' style={{ width: '200px' }}
+        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerBalance}>Miner Balance</Button>}
+          bordered={false} size='small' className='my-fil-home-card'
         >
           <span>Total: {nano2fil(actorState.data.Balance)} FIL</span><br/>
           <span>PreCommit: {nano2fil(actorState.data.State.PreCommitDeposits)} FIL</span><br/>
