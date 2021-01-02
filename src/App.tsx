@@ -1,10 +1,10 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import bytes from 'bytes';
 
 
 import './App.less';
-import { Layout, Menu, Modal, Input, Card, Divider, Typography, Button } from "antd";
+import { Layout, Menu, Modal, Input, Card, Divider, Typography, Button, message } from "antd";
 import { UserOutlined, ReloadOutlined } from '@ant-design/icons';
 
 import {
@@ -35,6 +35,11 @@ import {
   selectSectorCount,
 } from './reducers/sectorCountSlice';
 
+import {
+  fetchMinerRecoveries,
+  selectMinerRecoveries,
+} from './reducers/minerRecoveriesSlice';
+
 const { Header, Content, Footer } = Layout;
 
 const App: FC = () => {
@@ -45,6 +50,7 @@ const App: FC = () => {
   // const actorPower = useSelector(selectActorPower);
   const sectorsSummary = useSelector(selectSectorsSummary);
   const sectorCount = useSelector(selectSectorCount);
+  const minerRecoveries = useSelector(selectMinerRecoveries);
 
   const [visibleConnectInfoModal, setVisibleConnectInfoModal] = useState<boolean>(false);
 
@@ -59,6 +65,11 @@ const App: FC = () => {
     setVisibleConnectInfoModal(true);
   }
 
+  const handleClickMinerPower = () => {
+    dispatch(fetchSectorCount({ connectInfo, actorAddress }));
+    dispatch(fetchMinerRecoveries({ connectInfo, actorAddress }));
+  }
+
   const handleOKModalConnectInfo = () => {
     setVisibleConnectInfoModal(false);
     dispatch(fetchActorInfo(connectInfo));
@@ -68,6 +79,12 @@ const App: FC = () => {
   const handleChangeMinerApi = (e: React.ChangeEvent<HTMLInputElement>) => { dispatch(updateMinerApi(e.target.value)); }
   const handleChangeLotusToken = (e: React.ChangeEvent<HTMLInputElement>) => { dispatch(updateLotusToken(e.target.value)); }
   const handleChangeMinerToken = (e: React.ChangeEvent<HTMLInputElement>) => { dispatch(updateMinerToken(e.target.value)); }
+
+  useEffect(() => {
+    if (minerRecoveries.status === 'failed') {
+      message.error(minerRecoveries.error);
+    }
+  }, [minerRecoveries]);
 
   return (
     <Layout className='my-fil-layout'>
@@ -102,13 +119,14 @@ const App: FC = () => {
             </span>
           })}
         </Card>
-        <Card title={<Button type='dashed' icon={<ReloadOutlined />} onClick={() => dispatch(fetchSectorCount({connectInfo, actorAddress}))}>Miner Power</Button>}
+        <Card title={<Button type='dashed' icon={<ReloadOutlined />} onClick={handleClickMinerPower}>Miner Power</Button>}
           bordered={true} size='small' style={{ width: '200px' }}
         >
           <span>Live - Active: {bytes((sectorCount.Live-sectorCount.Active)*actorInfo.actorSectorSize)}</span><br/>
           <span>Live   Power: {bytes(sectorCount.Live*actorInfo.actorSectorSize)}</span><br/>
           <span>Active Power: {bytes(sectorCount.Active*actorInfo.actorSectorSize)}</span><br/>
-          <span>Faulty Power: {bytes(sectorCount.Faulty*actorInfo.actorSectorSize)}</span>
+          <span>Faulty Power: {bytes(sectorCount.Faulty*actorInfo.actorSectorSize)}</span><br/>
+          <span>Recoveries Power: {bytes(minerRecoveries.data[0]*actorInfo.actorSectorSize)}</span><br/>
         </Card>
       </Content>
       <Footer className='my-fil-footer'>
