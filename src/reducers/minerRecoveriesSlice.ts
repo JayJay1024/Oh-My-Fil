@@ -36,10 +36,11 @@ const fetchMinerRecoveries = createAsyncThunk(
       nodeMiner.on("open", async () => {
         try {
           const minerRecoveries = await nodeMiner.call('Filecoin.StateMinerRecoveries', [params.actorAddress, []]) as MinerRecoveriesState;
-          nodeMiner.close();
           resolve(minerRecoveries);
         } catch (err) {
           rejects(err);
+        } finally {
+          nodeMiner.close();
         }
       });
     });

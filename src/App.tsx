@@ -14,45 +14,32 @@ import {
   updateMinerToken,
   selectConnectInfo,
 } from './reducers/connectInfoSlice';
-
-import {
-  fetchActorInfo,
-  selectActorInfo,
-} from './reducers/actorInfoSlice';
-
-import {
-  fetchSectorsSummary,
-  selectSectorsSummary,
-} from './reducers/sectorsSummarySlice';
-
-// import {
-//   fetchActorPower,
-//   selectActorPower,
-// } from './reducers/actorPowerSlice';
-
-import {
-  fetchSectorCount,
-  selectSectorCount,
-} from './reducers/sectorCountSlice';
-
-import {
-  fetchMinerRecoveries,
-  selectMinerRecoveries,
-} from './reducers/minerRecoveriesSlice';
+import { fetchActorInfo, selectActorInfo } from './reducers/actorInfoSlice';
+import { fetchSectorsSummary, selectSectorsSummary } from './reducers/sectorsSummarySlice';
+import { fetchSectorCount, selectSectorCount } from './reducers/sectorCountSlice';
+import { fetchMinerRecoveries, selectMinerRecoveries } from './reducers/minerRecoveriesSlice';
+import { fetchMinerAvailableBalance, selectMinerAvailableBalance } from './reducers/minerAvailableBalanceSlice';
+import { fetchActorState, selectActorState } from './reducers/actorStateSlice';
 
 const { Header, Content, Footer } = Layout;
 
+const nano2fil = (nanoString: string): string => {
+  return (parseInt(nanoString.slice(0, -9))/(Math.pow(10, 9))).toFixed(3)
+}
+
 const App: FC = () => {
+  const [visibleConnectInfoModal, setVisibleConnectInfoModal] = useState<boolean>(false);
+
   const dispatch = useDispatch()
 
   const connectInfo = useSelector(selectConnectInfo);
   const actorInfo = useSelector(selectActorInfo);
-  // const actorPower = useSelector(selectActorPower);
   const sectorsSummary = useSelector(selectSectorsSummary);
   const sectorCount = useSelector(selectSectorCount);
   const minerRecoveries = useSelector(selectMinerRecoveries);
+  const minerAvailableBalance = useSelector(selectMinerAvailableBalance);
+  const actorState = useSelector(selectActorState);
 
-  const [visibleConnectInfoModal, setVisibleConnectInfoModal] = useState<boolean>(false);
 
   const actorAddress = actorInfo.actorAddress;
 
@@ -70,6 +57,11 @@ const App: FC = () => {
     dispatch(fetchMinerRecoveries({ connectInfo, actorAddress }));
   }
 
+  const handleClickMinerBalance = () => {
+    dispatch(fetchActorState({ connectInfo, actorAddress }));
+    dispatch(fetchMinerAvailableBalance({ connectInfo, actorAddress }));
+  }
+
   const handleOKModalConnectInfo = () => {
     setVisibleConnectInfoModal(false);
     dispatch(fetchActorInfo(connectInfo));
@@ -84,7 +76,17 @@ const App: FC = () => {
     if (minerRecoveries.status === 'failed') {
       message.error(minerRecoveries.error);
     }
-  }, [minerRecoveries]);
+    if (actorState.status === 'failed') {
+      message.error(actorState.error);
+    }
+    if (minerAvailableBalance.status === 'failed') {
+      message.error(minerAvailableBalance.error);
+    }
+  }, [
+    actorState,
+    minerRecoveries,
+    minerAvailableBalance,
+  ]);
 
   return (
     <Layout className='my-fil-layout'>
@@ -127,6 +129,15 @@ const App: FC = () => {
           <span>Active Power: {bytes(sectorCount.Active*actorInfo.actorSectorSize)}</span><br/>
           <span>Faulty Power: {bytes(sectorCount.Faulty*actorInfo.actorSectorSize)}</span><br/>
           <span>Recoveries Power: {bytes(minerRecoveries.data[0]*actorInfo.actorSectorSize)}</span><br/>
+        </Card>
+        <Card title={<Button type='dashed' icon={<ReloadOutlined />} onClick={handleClickMinerBalance}>Miner Balance</Button>}
+          bordered={true} size='small' style={{ width: '200px' }}
+        >
+          <span>Total: {nano2fil(actorState.data.Balance)} FIL</span><br/>
+          <span>PreCommit: {nano2fil(actorState.data.State.PreCommitDeposits)} FIL</span><br/>
+          <span>Pledge: {nano2fil(actorState.data.State.InitialPledge)} FIL</span><br/>
+          <span>Vesting: {nano2fil(actorState.data.State.LockedFunds)} FIL</span><br/>
+          <span>Available: {nano2fil(minerAvailableBalance.data)} FIL</span><br/>
         </Card>
       </Content>
       <Footer className='my-fil-footer'>

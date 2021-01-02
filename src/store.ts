@@ -16,6 +16,7 @@ import minerFaultsReducer from './reducers/minerFaultsSlice';
 import minerAvailableBalanceReducer from './reducers/minerAvailableBalanceSlice';
 import sectorCountReducer from './reducers/sectorCountSlice';
 import minerRecoveriesReducer from './reducers/minerRecoveriesSlice';
+import actorStateReducer from './reducers/actorStateSlice';
 
 export default configureStore({
   reducer: {
@@ -36,5 +37,6 @@ export default configureStore({
     minerAvailableBalance: minerAvailableBalanceReducer,
     sectorCount: sectorCountReducer,
     minerRecoveries: minerRecoveriesReducer,
+    actorState: actorStateReducer,
   },
 });
