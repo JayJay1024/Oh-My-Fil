@@ -1,7 +1,9 @@
 import { FC, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import './App.less';
+import { useSelector, useDispatch } from 'react-redux';
+import bytes from 'bytes';
 
+
+import './App.less';
 import { Layout, Menu, Modal, Input, Card, Divider, Typography, Button } from "antd";
 import { UserOutlined, ReloadOutlined } from '@ant-design/icons';
 
@@ -23,6 +25,16 @@ import {
   selectSectorsSummary,
 } from './reducers/sectorsSummarySlice';
 
+// import {
+//   fetchActorPower,
+//   selectActorPower,
+// } from './reducers/actorPowerSlice';
+
+import {
+  fetchSectorCount,
+  selectSectorCount,
+} from './reducers/sectorCountSlice';
+
 const { Header, Content, Footer } = Layout;
 
 const App: FC = () => {
@@ -30,16 +42,20 @@ const App: FC = () => {
 
   const connectInfo = useSelector(selectConnectInfo);
   const actorInfo = useSelector(selectActorInfo);
+  // const actorPower = useSelector(selectActorPower);
   const sectorsSummary = useSelector(selectSectorsSummary);
+  const sectorCount = useSelector(selectSectorCount);
 
   const [visibleConnectInfoModal, setVisibleConnectInfoModal] = useState<boolean>(false);
+
+  const actorAddress = actorInfo.actorAddress;
 
   const handleClickMenu = (e: any) => {
     console.log(e.key)
   }
 
   const handleClickNode = () => {
-    if (actorInfo.actorAddress.length) { return; }  // connected
+    if (actorAddress.length) { return; }  // connected
     setVisibleConnectInfoModal(true);
   }
 
@@ -67,7 +83,7 @@ const App: FC = () => {
         <Divider type='vertical' style={{ height: '60%' }} />
         <Divider type='vertical' style={{ height: '60%' }} />
         <Menu theme='light' mode='horizontal' onClick={handleClickNode}>
-  <Menu.Item key='node'>{actorInfo.actorAddress.length ? <><UserOutlined />{actorInfo.actorAddress}</> : <>Connect</> }</Menu.Item>
+          <Menu.Item key='node'>{actorAddress.length ? <><UserOutlined />{actorAddress} ({bytes(actorInfo.actorSectorSize)})</> : <>Connect</> }</Menu.Item>
         </Menu>
       </Header>
       <Content className='my-fil-content'>
@@ -85,6 +101,14 @@ const App: FC = () => {
               <Typography.Text>{key}: {sectorsSummary[key]}</Typography.Text><br/>
             </span>
           })}
+        </Card>
+        <Card title={<Button type='dashed' icon={<ReloadOutlined />} onClick={() => dispatch(fetchSectorCount({connectInfo, actorAddress}))}>Miner Power</Button>}
+          bordered={true} size='small' style={{ width: '200px' }}
+        >
+          <span>Live - Active: {bytes((sectorCount.Live-sectorCount.Active)*actorInfo.actorSectorSize)}</span><br/>
+          <span>Live   Power: {bytes(sectorCount.Live*actorInfo.actorSectorSize)}</span><br/>
+          <span>Active Power: {bytes(sectorCount.Active*actorInfo.actorSectorSize)}</span><br/>
+          <span>Faulty Power: {bytes(sectorCount.Faulty*actorInfo.actorSectorSize)}</span>
         </Card>
       </Content>
       <Footer className='my-fil-footer'>

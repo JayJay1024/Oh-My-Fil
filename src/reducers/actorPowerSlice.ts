@@ -4,7 +4,12 @@ import { Client } from 'rpc-websockets';
 import { RootState } from '../index';
 import { ConnectInfoState } from './connectInfoSlice';
 
-type ActorPowerState = object;
+interface BytePower { RawBytePower: string, QualityAdjPower: string }
+interface ActorPowerState {
+  MinerPower: BytePower,
+  TotalPower: BytePower,
+  HasMinPower: boolean,
+};
 
 const initilaState = {
   "MinerPower": {
@@ -27,7 +32,7 @@ const fetchActorPower = createAsyncThunk(
   'actor/power',
   async (params: fetchParam) => {
     return new Promise<ActorPowerState>((resolve, rejects) => {
-      const nodeMiner = new Client(`ws://${params.connectInfo.minerApi}/rpc/v0?token=${params.connectInfo.minerToken}`);
+      const nodeMiner = new Client(`ws://${params.connectInfo.lotusApi}/rpc/v0?token=${params.connectInfo.lotusToken}`);
 
       nodeMiner.on('error', async () => {
         rejects('failed');
