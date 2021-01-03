@@ -4,7 +4,7 @@ import bytes from 'bytes';
 
 
 import './App.less';
-import { Layout, Menu, Modal, Input, Card, Divider, Button, message } from "antd";
+import { Layout, Menu, Modal, Input, Card, Divider, Button, Spin, message } from "antd";
 import { UserOutlined, ReloadOutlined } from '@ant-design/icons';
 
 import {
@@ -112,7 +112,8 @@ const App: FC = () => {
           <Input allowClear={true} defaultValue={connectInfo.minerToken} onChange={handleChangeMinerToken} className='my-fil-node-info-button' placeholder='miner token' />
         </Modal>
         <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchSectorsSummary(connectInfo))}>Sectors Summary</Button>}
-          hoverable={true} bordered={false} size='small' className='my-fil-home-card' loading={false}
+          extra={sectorsSummary.status==='loading'?<Spin size='small' delay={200} />:''}
+          hoverable={true} bordered={false} size='small' className='my-fil-home-card'
         >
           {Object.keys(sectorsSummary.data).map((key: string) => {
             return (
@@ -124,7 +125,8 @@ const App: FC = () => {
           })}
         </Card>
         <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerPower}>Miner Power</Button>}
-          hoverable={true} bordered={false} size='small' className='my-fil-home-card' loading={false}
+          extra={sectorCount.status==='loading'||minerRecoveries.status==='loading'?<Spin size='small' delay={200} />:''}
+          hoverable={true} bordered={false} size='small' className='my-fil-home-card'
         >
           <div className='my-fil-home-card-item'>
             <div>Growth:</div>
@@ -148,7 +150,8 @@ const App: FC = () => {
           </div>
         </Card>
         <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerBalance}>Miner Balance</Button>}
-          hoverable={true} bordered={false} size='small' className='my-fil-home-card' loading={actorState.status==='loading'||minerAvailableBalance.status==='loading'?true:false}
+          extra={actorState.status==='loading'||minerAvailableBalance.status==='loading'?<Spin size='small' delay={200} />:''}
+          hoverable={true} bordered={false} size='small' className='my-fil-home-card'
         >
           <div className='my-fil-home-card-item'>
             <div>Total:</div>
