@@ -17,7 +17,7 @@ interface FetchActorPowerState {
   error: string | null | undefined,
 }
 
-const initilaState = {
+const initialState = {
   data: {
     "MinerPower": {
       "RawBytePower": "611053587136512",
@@ -65,7 +65,7 @@ const fetchActorPower = createAsyncThunk(
 
 const slice = createSlice({
   name: 'actorPower',
-  initialState: initilaState,
+  initialState: initialState,
   reducers: {
     updateActorPower(state, action: PayloadAction<ActorPowerState>) {
       // void(state);

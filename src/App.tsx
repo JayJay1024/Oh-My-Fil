@@ -20,6 +20,8 @@ import { fetchSectorCount, selectSectorCount } from './reducers/sectorCountSlice
 import { fetchMinerRecoveries, selectMinerRecoveries } from './reducers/minerRecoveriesSlice';
 import { fetchMinerAvailableBalance, selectMinerAvailableBalance } from './reducers/minerAvailableBalanceSlice';
 import { fetchActorState, selectActorState } from './reducers/actorStateSlice';
+import { fetchWorkerBalance, selectWorkerBalance, WorkerAddress } from './reducers/workerBalanceSlice';
+import { fetchMinerInfo, selectMinerInfo } from './reducers/minerInfoSlice';
 
 const { Header, Content, Footer } = Layout;
 
@@ -39,6 +41,8 @@ const App: FC = () => {
   const minerRecoveries = useSelector(selectMinerRecoveries);
   const minerAvailableBalance = useSelector(selectMinerAvailableBalance);
   const actorState = useSelector(selectActorState);
+  const minerInfo = useSelector(selectMinerInfo);
+  const workerBalance = useSelector(selectWorkerBalance);
 
   const actorAddress = actorInfo.data.actorAddress;
 
@@ -57,6 +61,13 @@ const App: FC = () => {
   }
 
   const handleClickMinerBalance = () => {
+    const actorAddress1 = {
+      owner: minerInfo.data.Owner,
+      worker: minerInfo.data.Worker,
+      control: minerInfo.data.ControlAddresses[0],
+    } as WorkerAddress;
+    dispatch(fetchWorkerBalance({ connectInfo, actorAddress: actorAddress1}));
+
     dispatch(fetchActorState({ connectInfo, actorAddress }));
     dispatch(fetchMinerAvailableBalance({ connectInfo, actorAddress }));
   }
@@ -72,6 +83,10 @@ const App: FC = () => {
   const handleChangeMinerToken = (e: React.ChangeEvent<HTMLInputElement>) => { dispatch(updateMinerToken(e.target.value)); }
 
   useEffect(() => {
+    dispatch(fetchMinerInfo({ connectInfo, actorAddress }));
+  }, [connectInfo, actorAddress, dispatch]);
+
+  useEffect(() => {
     if (minerRecoveries.status === 'failed') {
       message.error(minerRecoveries.error);
     }
@@ -81,10 +96,18 @@ const App: FC = () => {
     if (minerAvailableBalance.status === 'failed') {
       message.error(minerAvailableBalance.error);
     }
+    if (minerInfo.status === 'failed') {
+      message.error(minerInfo.error);
+    }
+    if (workerBalance.status === 'failed') {
+      message.error(workerBalance.error);
+    }
   }, [
     actorState,
+    minerInfo,
     minerRecoveries,
     minerAvailableBalance,
+    workerBalance,
   ]);
 
   return (
@@ -150,9 +173,10 @@ const App: FC = () => {
           </div>
         </Card>
         <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerBalance}>Miner Balance</Button>}
-          extra={actorState.status==='loading'||minerAvailableBalance.status==='loading'?<Spin size='small' delay={200} />:''}
+          extra={actorState.status==='loading'||minerAvailableBalance.status==='loading'||workerBalance.status==='loading'?<Spin size='small' delay={200} />:''}
           hoverable={true} bordered={false} size='small' className='my-fil-home-card'
         >
+          <Divider plain style={{ margin: '0px' }}>Miner Balance:</Divider>
           <div className='my-fil-home-card-item'>
             <div>Total:</div>
             <div>{nano2fil(actorState.data.Balance)} FIL</div>
@@ -172,6 +196,19 @@ const App: FC = () => {
           <div className='my-fil-home-card-item'>
             <div>Available:</div>
             <div>{nano2fil(minerAvailableBalance.data)} FIL</div>
+          </div>
+          <Divider plain style={{ margin: '0px' }}>Worker Balance:</Divider>
+          <div className='my-fil-home-card-item'>
+            <div>Owner:</div>
+            <div>{nano2fil(workerBalance.data.owner)} FIL</div>
+          </div>
+          <div className='my-fil-home-card-item'>
+            <div>Worker:</div>
+            <div>{nano2fil(workerBalance.data.worker)} FIL</div>
+          </div>
+          <div className='my-fil-home-card-item'>
+            <div>Control:</div>
+            <div>{nano2fil(workerBalance.data.control)} FIL</div>
           </div>
         </Card>
       </Content>
