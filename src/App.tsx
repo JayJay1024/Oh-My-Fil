@@ -128,23 +128,23 @@ const App: FC = () => {
           hoverable={true} bordered={false} size='small' className='my-fil-home-card' loading={false}
         >
           <div className='my-fil-home-card-item'>
-            <div>Live - Active:</div>
+            <div>Growth:</div>
             <div>{bytes((sectorCount.Live-sectorCount.Active)*actorInfo.actorSectorSize)}</div>
           </div>
           <div className='my-fil-home-card-item'>
-            <div>Live   Power:</div>
+            <div>Committed:</div>
             <div>{bytes(sectorCount.Live*actorInfo.actorSectorSize)}</div>
           </div>
           <div className='my-fil-home-card-item'>
-            <div>Active Power:</div>
+            <div>Proving:</div>
             <div>{bytes(sectorCount.Active*actorInfo.actorSectorSize)}</div>
           </div>
           <div className='my-fil-home-card-item'>
-            <div>Faulty Power:</div>
+            <div>Faulty:</div>
             <div>{bytes(sectorCount.Faulty*actorInfo.actorSectorSize)}</div>
           </div>
           <div className='my-fil-home-card-item'>
-            <div>Recoveries Power:</div>
+            <div>Recoveries:</div>
             <div>{bytes(minerRecoveries.data[0]*actorInfo.actorSectorSize)}</div>
           </div>
         </Card>
