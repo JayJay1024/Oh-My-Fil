@@ -4,7 +4,7 @@ import bytes from 'bytes';
 
 
 import './App.less';
-import { Layout, Menu, Modal, Input, Card, Divider, Typography, Button, message } from "antd";
+import { Layout, Menu, Modal, Input, Card, Divider, Button, message } from "antd";
 import { UserOutlined, ReloadOutlined } from '@ant-design/icons';
 
 import {
@@ -40,8 +40,7 @@ const App: FC = () => {
   const minerAvailableBalance = useSelector(selectMinerAvailableBalance);
   const actorState = useSelector(selectActorState);
 
-
-  const actorAddress = actorInfo.actorAddress;
+  const actorAddress = actorInfo.data.actorAddress;
 
   const handleClickMenu = (e: any) => {
     console.log(e.key)
@@ -102,7 +101,7 @@ const App: FC = () => {
         <Divider type='vertical' style={{ height: '60%' }} />
         <Divider type='vertical' style={{ height: '60%' }} />
         <Menu theme='light' mode='horizontal' onClick={handleClickNode}>
-          <Menu.Item key='node'>{actorAddress.length ? <><UserOutlined />{actorAddress} ({bytes(actorInfo.actorSectorSize)})</> : <>Connect</> }</Menu.Item>
+          <Menu.Item key='node'>{actorAddress.length ? <><UserOutlined />{actorAddress} ({bytes(actorInfo.data.actorSectorSize)})</> : <>Connect</> }</Menu.Item>
         </Menu>
       </Header>
       <Content className='my-fil-content'>
@@ -115,11 +114,11 @@ const App: FC = () => {
         <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchSectorsSummary(connectInfo))}>Sectors Summary</Button>}
           hoverable={true} bordered={false} size='small' className='my-fil-home-card' loading={false}
         >
-          {Object.keys(sectorsSummary).map((key: string) => {
+          {Object.keys(sectorsSummary.data).map((key: string) => {
             return (
               <div className='my-fil-home-card-item' key={key}>
                 <div>{key}:</div>
-                <div>{sectorsSummary[key]}</div>
+                <div>{sectorsSummary.data[key]}</div>
               </div>
             )
           })}
@@ -129,23 +128,23 @@ const App: FC = () => {
         >
           <div className='my-fil-home-card-item'>
             <div>Growth:</div>
-            <div>{bytes((sectorCount.Live-sectorCount.Active)*actorInfo.actorSectorSize)}</div>
+            <div>{bytes((sectorCount.data.Live-sectorCount.data.Active)*actorInfo.data.actorSectorSize)}</div>
           </div>
           <div className='my-fil-home-card-item'>
             <div>Committed:</div>
-            <div>{bytes(sectorCount.Live*actorInfo.actorSectorSize)}</div>
+            <div>{bytes(sectorCount.data.Live*actorInfo.data.actorSectorSize)}</div>
           </div>
           <div className='my-fil-home-card-item'>
             <div>Proving:</div>
-            <div>{bytes(sectorCount.Active*actorInfo.actorSectorSize)}</div>
+            <div>{bytes(sectorCount.data.Active*actorInfo.data.actorSectorSize)}</div>
           </div>
           <div className='my-fil-home-card-item'>
             <div>Faulty:</div>
-            <div>{bytes(sectorCount.Faulty*actorInfo.actorSectorSize)}</div>
+            <div>{bytes(sectorCount.data.Faulty*actorInfo.data.actorSectorSize)}</div>
           </div>
           <div className='my-fil-home-card-item'>
             <div>Recoveries:</div>
-            <div>{bytes(minerRecoveries.data[0]*actorInfo.actorSectorSize)}</div>
+            <div>{bytes(minerRecoveries.data[0]*actorInfo.data.actorSectorSize)}</div>
           </div>
         </Card>
         <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerBalance}>Miner Balance</Button>}

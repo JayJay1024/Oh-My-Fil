@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Client } from 'rpc-websockets';
 
 import { RootState } from '../index';
@@ -8,17 +8,27 @@ interface SectorsSummaryState {
   [index: string]: number
 };
 
+interface FetchSectorsSummaryState {
+  data: SectorsSummaryState,
+  status: 'idle' | 'loading' | 'succeeded' | 'failed',
+  error: string | null | undefined,
+}
+
 const initialState = {
-  CommitFailed: 15,
-  Committing: 61,
-  FinalizeSector: 1,
-  PreCommit1: 111,
-  PreCommit2: 3,
-  Proving: 11769,
-  Removed: 599,
-  SubmitCommit: 17,
-  WaitSeed: 32
-} as SectorsSummaryState;
+  data: {
+    CommitFailed: 15,
+    Committing: 61,
+    FinalizeSector: 1,
+    PreCommit1: 111,
+    PreCommit2: 3,
+    Proving: 11769,
+    Removed: 599,
+    SubmitCommit: 17,
+    WaitSeed: 32
+  },
+  status: 'idle',
+  error: null,
+} as FetchSectorsSummaryState;
 
 const fetchSectorsSummary = createAsyncThunk(
   'sectors/summary',
@@ -26,15 +36,20 @@ const fetchSectorsSummary = createAsyncThunk(
     return new Promise<SectorsSummaryState>((resolve, rejects) => {
       const nodeMiner = new Client(`ws://${connectInfo.minerApi}/rpc/v0?token=${connectInfo.minerToken}`);
 
-      nodeMiner.on('error', async () => {
-        rejects('failed');
+      nodeMiner.on('error', async (err) => {
+        rejects(err);
       });
       nodeMiner.on('close', () => { });
 
       nodeMiner.on("open", async () => {
-        const sectorsSummary = await nodeMiner.call('Filecoin.SectorsSummary', []) as SectorsSummaryState;
-        nodeMiner.close();
-        resolve(sectorsSummary);
+        try {
+          const sectorsSummary = await nodeMiner.call('Filecoin.SectorsSummary', []) as SectorsSummaryState;
+          resolve(sectorsSummary);
+        } catch (err) {
+          rejects(err);
+        } finally {
+          nodeMiner.close();
+        }
       });
     });
   }
@@ -43,24 +58,23 @@ const fetchSectorsSummary = createAsyncThunk(
 const slice = createSlice({
   name: 'sectorsSummary',
   initialState: initialState,
-  reducers: {
-    updateSectorsSummay(state, action: PayloadAction<SectorsSummaryState>) {
-      // state = action.payload;
-      void(state);
-      return action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
+    builder.addCase(fetchSectorsSummary.pending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addCase(fetchSectorsSummary.rejected, (state, action) => {
+      state.status = 'loading';
+      state.error = action.error.message;
+    });
     builder.addCase(fetchSectorsSummary.fulfilled, (state, action) => {
-      // state = action.payload;
-      void(state);
-      return action.payload;
+      state.status = 'succeeded';
+      state.data = action.payload;
     });
   },
 });
 
 export { fetchSectorsSummary };
-export const { updateSectorsSummay } = slice.actions;
 export const selectSectorsSummary = (state: RootState) => state.sectorsSummary;
 
 export default slice.reducer;

@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { stat } from 'fs';
 import { Client } from 'rpc-websockets';
 
 import { RootState } from '../index';
@@ -10,11 +11,21 @@ interface SectorCountState {
   Faulty: number,
 }
 
+interface FetchSectorCountState {
+  data: SectorCountState,
+  status: 'idle' | 'loading' | 'succeeded' | 'failed',
+  error: string | null | undefined,
+}
+
 const initialState = {
-  "Live": 18666,
-  "Active": 18453,
-  "Faulty": 0
-} as SectorCountState;
+  data: {
+    "Live": 18666,
+    "Active": 18453,
+    "Faulty": 0
+  },
+  status: 'idle',
+  error: null,
+} as FetchSectorCountState;
 
 interface fetchParam {
   connectInfo: ConnectInfoState,
@@ -27,15 +38,20 @@ const fetchSectorCount = createAsyncThunk(
     return new Promise<SectorCountState>((resolve, rejects) => {
       const nodeMiner = new Client(`ws://${params.connectInfo.lotusApi}/rpc/v0?token=${params.connectInfo.lotusToken}`);
 
-      nodeMiner.on('error', async () => {
-        rejects('failed');
+      nodeMiner.on('error', async (err) => {
+        rejects(err);
       });
       nodeMiner.on('close', () => { });
 
       nodeMiner.on("open", async () => {
-        const sectorCount = await nodeMiner.call('Filecoin.StateMinerSectorCount', [params.actorAddress, []]) as SectorCountState;
-        nodeMiner.close();
-        resolve(sectorCount);
+        try {
+          const sectorCount = await nodeMiner.call('Filecoin.StateMinerSectorCount', [params.actorAddress, []]) as SectorCountState;
+          resolve(sectorCount);
+        } catch (err) {
+          rejects(err);
+        } finally {
+          nodeMiner.close();
+        }
       });
     });
   }
@@ -46,9 +62,16 @@ const slice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: builder => {
+    builder.addCase(fetchSectorCount.pending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addCase(fetchSectorCount.rejected, (state, action) => {
+      state.status = 'loading';
+      state.error = action.error.message;
+    });
     builder.addCase(fetchSectorCount.fulfilled, (state, action) => {
-      void(state);
-      return action.payload;
+      state.status = 'succeeded';
+      state.data = action.payload;
     });
   }
 });
