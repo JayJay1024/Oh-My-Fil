@@ -26,6 +26,7 @@ import { fetchWorkerBalance, selectWorkerBalance, WorkerAddress } from './reduce
 import { fetchMinerInfo, selectMinerInfo } from './reducers/minerInfoSlice';
 import { fetchActorPower, selectActorPower } from './reducers/actorPowerSlice';
 import { fetchWorkerJobs, selectWorkerJobs } from './reducers/workerJobsSlice';
+import { fetchWorkerStat, selectWorkerStat } from './reducers/workerStatSlice';
 
 const { Header, Content, Footer } = Layout;
 
@@ -49,6 +50,7 @@ const App: FC = () => {
   const workerBalance = useSelector(selectWorkerBalance);
   const actorPower = useSelector(selectActorPower);
   const workerJobs = useSelector(selectWorkerJobs);
+  const workerStat = useSelector(selectWorkerStat);
 
   const actorAddress = actorInfo.data.actorAddress;
 
@@ -112,6 +114,9 @@ const App: FC = () => {
     if (workerJobs.status === 'failed') {
       message.error(workerJobs.error);
     }
+    if (workerStat.status === 'failed') {
+      message.error(workerStat.error);
+    }
   }, [
     actorState,
     minerInfo,
@@ -119,6 +124,7 @@ const App: FC = () => {
     minerAvailableBalance,
     workerBalance,
     workerJobs,
+    workerStat,
   ]);
 
   // Expected
@@ -149,6 +155,26 @@ const App: FC = () => {
       }
     }
   }
+
+  // Worker count
+  interface WorkerCountState {
+    [index: string]: number
+  }
+  let totalWorker: number = 0;
+  let workerCount: WorkerCountState = {};
+  for (let wid in workerStat.data) {
+    totalWorker++;
+    const tasks = Object.keys(workerStat.data[wid].Info.TaskTypes);
+
+    for (let taskFullName of tasks) {
+      const task = taskShortName(taskFullName);
+      if (task) {
+        const count = workerCount[task] || 0;
+        workerCount[task] = count + 1;
+      }
+    }
+  }
+  workerCount['Total'] = totalWorker;
 
   return (
     <Layout className='my-fil-layout'>
@@ -266,6 +292,19 @@ const App: FC = () => {
               <div className='my-fil-home-card-item' key={key}>
                 <div>{key}:</div>
                 <div>{taskCount[key]}</div>
+              </div>
+            )
+          })}
+        </Card>
+        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerStat(connectInfo))}>Worker Count</Button>}
+          extra={workerStat.status==='loading'?<Spin size='small' delay={200} />:''}
+          hoverable={true} bordered={false} size='small' className='my-fil-home-card'
+        >
+          {Object.keys(workerCount).map((key: string) => {
+            return (
+              <div className='my-fil-home-card-item' key={key}>
+                <div>{key}:</div>
+                <div>{workerCount[key]}</div>
               </div>
             )
           })}
