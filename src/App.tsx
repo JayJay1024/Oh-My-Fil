@@ -92,40 +92,56 @@ const App: FC = () => {
   const handleChangeMinerToken = (e: React.ChangeEvent<HTMLInputElement>) => { dispatch(updateMinerToken(e.target.value)); }
 
   useEffect(() => {
-    dispatch(fetchMinerInfo({ connectInfo, actorAddress }));
+    if (actorAddress.length) {
+      dispatch(fetchMinerInfo({ connectInfo, actorAddress }));
+    }
   }, [connectInfo, actorAddress, dispatch]);
 
   useEffect(() => {
     if (minerRecoveries.status === 'failed') {
       message.error(minerRecoveries.error);
     }
+  }, [minerRecoveries]);
+  useEffect(() => {
     if (actorState.status === 'failed') {
       message.error(actorState.error);
     }
+  }, [actorState]);
+  useEffect(() => {
     if (minerAvailableBalance.status === 'failed') {
       message.error(minerAvailableBalance.error);
     }
+  }, [minerAvailableBalance]);
+  useEffect(() => {
     if (minerInfo.status === 'failed') {
       message.error(minerInfo.error);
     }
+  }, [minerInfo]);
+  useEffect(() => {
     if (workerBalance.status === 'failed') {
       message.error(workerBalance.error);
     }
+  }, [workerBalance]);
+  useEffect(() => {
     if (workerJobs.status === 'failed') {
       message.error(workerJobs.error);
     }
+  }, [workerJobs]);
+  useEffect(() => {
     if (workerStat.status === 'failed') {
       message.error(workerStat.error);
     }
-  }, [
-    actorState,
-    minerInfo,
-    minerRecoveries,
-    minerAvailableBalance,
-    workerBalance,
-    workerJobs,
-    workerStat,
-  ]);
+  }, [workerStat]);
+  useEffect(() => {
+    if (sectorCount.status === 'failed') {
+      message.error(sectorCount.error);
+    }
+  }, [sectorCount]);
+  useEffect(() => {
+    if (actorPower.status === 'failed') {
+      message.error(actorPower.error);
+    }
+  }, [actorPower]);
 
   // Expected
   let winPerDay: number = 0;

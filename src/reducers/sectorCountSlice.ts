@@ -65,7 +65,7 @@ const slice = createSlice({
       state.status = 'loading';
     });
     builder.addCase(fetchSectorCount.rejected, (state, action) => {
-      state.status = 'loading';
+      state.status = 'failed';
       state.error = action.error.message;
     });
     builder.addCase(fetchSectorCount.fulfilled, (state, action) => {
