@@ -109,12 +109,16 @@ const App: FC = () => {
     if (workerBalance.status === 'failed') {
       message.error(workerBalance.error);
     }
+    if (workerJobs.status === 'failed') {
+      message.error(workerJobs.error);
+    }
   }, [
     actorState,
     minerInfo,
     minerRecoveries,
     minerAvailableBalance,
     workerBalance,
+    workerJobs,
   ]);
 
   // Expected
