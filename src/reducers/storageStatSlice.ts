@@ -4,18 +4,27 @@ import { Client } from 'rpc-websockets';
 import { RootState } from '../index';
 import { ConnectInfoState } from './connectInfoSlice';
 
-type StorageStatState = object;
+interface StorageStatState {
+  Capacity: number,
+  Available: number,
+  Reserved: number
+};
+interface StorageStatWithIDState {
+  [index: string]: StorageStatState,
+}
 interface FetchStorageStatState {
-  data: StorageStatState,
+  data: StorageStatWithIDState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,
 }
 
 const initialState = {
   data: {
-    "Capacity": 106016318423040,
-    "Available": 23399262846976,
-    "Reserved": 0
+    '077bdf75-e502-43e6-ac98-04c831b0c8c9': {
+      "Capacity": 106016318423040,
+      "Available": 23399262846976,
+      "Reserved": 0
+    }
   },
   status: 'idle',
   error: null,
@@ -29,7 +38,7 @@ interface fetchParams {
 const fetchStorageStat = createAsyncThunk(
   'storage/stat',
   async (params: fetchParams) => {
-    return new Promise<StorageStatState>((resolve, rejects) => {
+    return new Promise<StorageStatWithIDState>((resolve, rejects) => {
       const nodeMiner = new Client(`ws://${params.connectInfo.minerApi}/rpc/v0?token=${params.connectInfo.minerToken}`);
 
       nodeMiner.on('error', async (err) => {
@@ -40,7 +49,10 @@ const fetchStorageStat = createAsyncThunk(
       nodeMiner.on("open", async () => {
         try {
           const storageStat = await nodeMiner.call('Filecoin.StorageStat', [ params.storageId ]) as StorageStatState;
-          resolve(storageStat);
+          const storageStatWithID = {
+            [params.storageId]: storageStat
+          }
+          resolve(storageStatWithID);
         } catch (err) {
           rejects(err);
         } finally {
@@ -54,7 +66,13 @@ const fetchStorageStat = createAsyncThunk(
 const slice = createSlice({
   name: 'storageStat',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    clearStorageList(state) {
+      state.data = {};
+      state.error = null;
+      state.status = 'idle';
+    }
+  },
   extraReducers: builder => {
     builder.addCase(fetchStorageStat.pending, (state) => {
       state.status = 'loading';
@@ -65,12 +83,14 @@ const slice = createSlice({
     });
     builder.addCase(fetchStorageStat.fulfilled, (state, action) => {
       state.status = 'succeeded';
-      state.data = action.payload;
+      const key = Object.keys(action.payload)[0];
+      state.data[key] = action.payload[key];
     });
   }
 });
 
 export { fetchStorageStat };
+export const { clearStorageList } = slice.actions;
 export const selectStorageStat = (state: RootState) => state.storageStat;
 
 export default slice.reducer;

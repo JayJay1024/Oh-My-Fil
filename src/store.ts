@@ -9,6 +9,7 @@ import storageStatReducer from './reducers/storageStatSlice';
 import storageInfoReducer from './reducers/storageInfoSlice';
 import workerStatReducer from './reducers/workerStatSlice';
 import workerJobsReducer from './reducers/workerJobsSlice';
+import storageListReducer from './reducers/storageListSlice';
 
 // lotus api
 import actorPowerReducer from './reducers/actorPowerSlice';
@@ -32,6 +33,7 @@ export default configureStore({
     storageInfo: storageInfoReducer,
     workerStat: workerStatReducer,
     workerJobs: workerJobsReducer,
+    storageList: storageListReducer,
 
     // lotus api
     actorPower: actorPowerReducer,

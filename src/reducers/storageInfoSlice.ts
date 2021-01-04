@@ -4,23 +4,35 @@ import { Client } from 'rpc-websockets';
 import { RootState } from '../index';
 import { ConnectInfoState } from './connectInfoSlice';
 
-type StorageInfoState = object;
+interface StorageInfoState {
+  ID: string,
+  Path: string,
+  URLs: string[],
+  Weight: number,
+  CanSeal: boolean,
+  CanStore: boolean
+};
+interface StorageInfoWithIDState {
+  [index: string]: StorageInfoState
+}
 interface FetchStorageInfoState {
-  data: StorageInfoState,
+  data: StorageInfoWithIDState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,
 }
 
 const initialState = {
   data: {
-    "ID": "9921d275-fa30-4e02-81b4-c05a349e0bb4",
-    "Path": "/data-2/store",
-    "URLs": [
-        "http://192.168.1.190:2321/remote"
-    ],
-    "Weight": 10,
-    "CanSeal": false,
-    "CanStore": false
+    "9921d275-fa30-4e02-81b4-c05a349e0bb4": {
+      "ID": "9921d275-fa30-4e02-81b4-c05a349e0bb4",
+      "Path": "/data-2/store",
+      "URLs": [
+          "http://192.168.1.190:2321/remote"
+      ],
+      "Weight": 10,
+      "CanSeal": false,
+      "CanStore": false
+    }
   },
   status: 'idle',
   error: null,
@@ -59,7 +71,13 @@ const fetchStorageInfo = createAsyncThunk(
 const slice = createSlice({
   name: 'storageInfo',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    clearStorageInfo(state) {
+      state.data = {};
+      state.error = null;
+      state.status = 'idle';
+    }
+  },
   extraReducers: builder => {
     builder.addCase(fetchStorageInfo.pending, (state) => {
       state.status = 'loading';
@@ -70,12 +88,13 @@ const slice = createSlice({
     });
     builder.addCase(fetchStorageInfo.fulfilled, (state, action) => {
       state.status = 'succeeded';
-      state.data = action.payload;
+      state.data[action.payload.ID] = action.payload;
     });
   }
 });
 
 export { fetchStorageInfo };
+export const { clearStorageInfo } = slice.actions;
 export const selectStorageInfo = (state: RootState) => state.storageInfo;
 
 export default slice.reducer;
