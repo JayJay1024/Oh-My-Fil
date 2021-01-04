@@ -4,7 +4,9 @@ import { Client } from 'rpc-websockets';
 import { RootState } from '../index';
 import { ConnectInfoState } from './connectInfoSlice';
 
-type WorkerJobsState = any;
+interface WorkerJobsState {
+  [index: string]: any,
+};
 interface FetchWorkerJobsState {
   data: WorkerJobsState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',

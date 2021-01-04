@@ -7,6 +7,8 @@ import './App.less';
 import { Layout, Menu, Modal, Input, Card, Divider, Button, Spin, message } from "antd";
 import { UserOutlined, ReloadOutlined } from '@ant-design/icons';
 
+import { taskShortName } from './utility';
+
 import {
   updateLotusApi,
   updateMinerApi,
@@ -23,6 +25,7 @@ import { fetchActorState, selectActorState } from './reducers/actorStateSlice';
 import { fetchWorkerBalance, selectWorkerBalance, WorkerAddress } from './reducers/workerBalanceSlice';
 import { fetchMinerInfo, selectMinerInfo } from './reducers/minerInfoSlice';
 import { fetchActorPower, selectActorPower } from './reducers/actorPowerSlice';
+import { fetchWorkerJobs, selectWorkerJobs } from './reducers/workerJobsSlice';
 
 const { Header, Content, Footer } = Layout;
 
@@ -45,6 +48,7 @@ const App: FC = () => {
   const minerInfo = useSelector(selectMinerInfo);
   const workerBalance = useSelector(selectWorkerBalance);
   const actorPower = useSelector(selectActorPower);
+  const workerJobs = useSelector(selectWorkerJobs);
 
   const actorAddress = actorInfo.data.actorAddress;
 
@@ -113,6 +117,7 @@ const App: FC = () => {
     workerBalance,
   ]);
 
+  // Expected
   let winPerDay: number = 0;
   const qpercI = (parseInt(actorPower.data.MinerPower.QualityAdjPower) * 1000000) / parseInt(actorPower.data.TotalPower.QualityAdjPower);
   let expWinChance = qpercI * 5 / 1000000;
@@ -122,6 +127,23 @@ const App: FC = () => {
     }
     const winRate = 1000000000 * 30 / expWinChance;
     winPerDay = 3600000000000 * 24 / winRate;
+  }
+
+  // Task count
+  interface TaskCountState {
+    [index: string]: number
+  }
+  let taskCount: TaskCountState = {};
+  for (let wid in workerJobs.data) {
+    const jobs = workerJobs.data[wid];
+
+    for (let job of jobs) {
+      let task = taskShortName(job.Task);
+      if (task) {
+        const count = taskCount[task] || 0;
+        taskCount[task] = count + 1;
+      }
+    }
   }
 
   return (
@@ -230,6 +252,19 @@ const App: FC = () => {
             <div>Control:</div>
             <div>{nano2fil(workerBalance.data.control)} FIL</div>
           </div>
+        </Card>
+        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerJobs(connectInfo))}>Tasks Count</Button>}
+          extra={workerJobs.status==='loading'?<Spin size='small' delay={200} />:''}
+          hoverable={true} bordered={false} size='small' className='my-fil-home-card'
+        >
+          {Object.keys(taskCount).map((key: string) => {
+            return (
+              <div className='my-fil-home-card-item' key={key}>
+                <div>{key}:</div>
+                <div>{taskCount[key]}</div>
+              </div>
+            )
+          })}
         </Card>
       </Content>
       <Footer className='my-fil-footer'>
