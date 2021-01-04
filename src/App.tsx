@@ -22,6 +22,7 @@ import { fetchMinerAvailableBalance, selectMinerAvailableBalance } from './reduc
 import { fetchActorState, selectActorState } from './reducers/actorStateSlice';
 import { fetchWorkerBalance, selectWorkerBalance, WorkerAddress } from './reducers/workerBalanceSlice';
 import { fetchMinerInfo, selectMinerInfo } from './reducers/minerInfoSlice';
+import { fetchActorPower, selectActorPower } from './reducers/actorPowerSlice';
 
 const { Header, Content, Footer } = Layout;
 
@@ -43,6 +44,7 @@ const App: FC = () => {
   const actorState = useSelector(selectActorState);
   const minerInfo = useSelector(selectMinerInfo);
   const workerBalance = useSelector(selectWorkerBalance);
+  const actorPower = useSelector(selectActorPower);
 
   const actorAddress = actorInfo.data.actorAddress;
 
@@ -58,6 +60,7 @@ const App: FC = () => {
   const handleClickMinerPower = () => {
     dispatch(fetchSectorCount({ connectInfo, actorAddress }));
     dispatch(fetchMinerRecoveries({ connectInfo, actorAddress }));
+    dispatch(fetchActorPower({ connectInfo, actorAddress }));
   }
 
   const handleClickMinerBalance = () => {
@@ -110,6 +113,17 @@ const App: FC = () => {
     workerBalance,
   ]);
 
+  let winPerDay: number = 0;
+  const qpercI = (parseInt(actorPower.data.MinerPower.QualityAdjPower) * 1000000) / parseInt(actorPower.data.TotalPower.QualityAdjPower);
+  let expWinChance = qpercI * 5 / 1000000;
+  if (expWinChance > 0) {
+    if (expWinChance > 1) {
+      expWinChance = 1;
+    }
+    const winRate = 1000000000 * 30 / expWinChance;
+    winPerDay = 3600000000000 * 24 / winRate;
+  }
+
   return (
     <Layout className='my-fil-layout'>
       <Header className='my-fil-header'>
@@ -151,6 +165,7 @@ const App: FC = () => {
           extra={sectorCount.status==='loading'||minerRecoveries.status==='loading'?<Spin size='small' delay={200} />:''}
           hoverable={true} bordered={false} size='small' className='my-fil-home-card'
         >
+          <Divider plain style={{ margin: '0px' }}>Power:</Divider>
           <div className='my-fil-home-card-item'>
             <div>Growth:</div>
             <div>{bytes((sectorCount.data.Live-sectorCount.data.Active)*actorInfo.data.actorSectorSize)}</div>
@@ -170,6 +185,11 @@ const App: FC = () => {
           <div className='my-fil-home-card-item'>
             <div>Recoveries:</div>
             <div>{bytes(minerRecoveries.data[0]*actorInfo.data.actorSectorSize)}</div>
+          </div>
+          <Divider plain style={{ margin: '0px' }}>Expected:</Divider>
+          <div className='my-fil-home-card-item'>
+            <div>Win Rate:</div>
+            <div>{winPerDay.toFixed(4)}/day</div>
           </div>
         </Card>
         <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerBalance}>Miner Balance</Button>}
