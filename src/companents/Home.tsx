@@ -122,7 +122,7 @@ const Home: FC = () => {
   workerCount['Total'] = totalWorker;
 
   return (
-    <>
+    <div className='my-fil-home-content'>
       <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchSectorsSummary(connectInfo))}>Sectors Summary</Button>}
         extra={sectorsSummary.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
         hoverable={true} bordered={false} size='small' className='my-fil-home-card'
@@ -232,7 +232,7 @@ const Home: FC = () => {
           )
         })}
       </Card>
-    </>
+    </div>
   );
 };
 

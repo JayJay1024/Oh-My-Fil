@@ -4,33 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import Workers from './companents/Workers';
-
 import store from './store';
 import { Provider } from 'react-redux';
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  // Link
-} from "react-router-dom";
 
 export type RootState = ReturnType<typeof store.getState>;
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route path='/workers'>
-            <Workers></Workers>
-          </Route>
-          <Route path='/'>
-            <App />
-          </Route>
-        </Switch>
-      </Router>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
