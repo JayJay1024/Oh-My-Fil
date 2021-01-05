@@ -15,7 +15,7 @@ const initialState = {
   data: {
     '02f46ada-47ab-430c-b7a3-992987401ab0': {
       Info: {
-        Hostname: 'HI06:-SIR-B002',
+        Hostname: 'HI06-SIR-B002',
         Urls: [
           'http://110.16.41.22:30773/remote'
         ],
@@ -33,7 +33,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI06:-SIR-B002',
+        Device: 'HI06-SIR-B002',
         Session: '02f46ada-47ab-430c-b7a3-992987401ab0',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -57,7 +57,7 @@ const initialState = {
     },
     '03e8611f-46b5-4af8-a0e7-f534078c3ca6': {
       Info: {
-        Hostname: 'HI03:-SIR-A003',
+        Hostname: 'HI03-SIR-A003',
         Urls: [
           'http://110.16.41.3:30773/remote'
         ],
@@ -75,7 +75,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI03:-SIR-A003',
+        Device: 'HI03-SIR-A003',
         Session: '03e8611f-46b5-4af8-a0e7-f534078c3ca6',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -141,7 +141,7 @@ const initialState = {
     },
     '0ba03e11-dbce-4526-9061-97670143fa2f': {
       Info: {
-        Hostname: 'HI07:-SIR-B005',
+        Hostname: 'HI07-SIR-B005',
         Urls: [
           'http://110.16.41.25:30771/remote'
         ],
@@ -159,7 +159,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI07:-SIR-B005',
+        Device: 'HI07-SIR-B005',
         Session: '0ba03e11-dbce-4526-9061-97670143fa2f',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -185,7 +185,7 @@ const initialState = {
     },
     '0ca772e7-b84e-410b-a25d-6837752dd97c': {
       Info: {
-        Hostname: 'HI06:-SIR-B002',
+        Hostname: 'HI06-SIR-B002',
         Urls: [
           'http://110.16.41.22:30775/remote'
         ],
@@ -203,7 +203,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI06:-SIR-B002',
+        Device: 'HI06-SIR-B002',
         Session: '0ca772e7-b84e-410b-a25d-6837752dd97c',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -273,7 +273,7 @@ const initialState = {
     },
     '14e7da72-1cd9-4565-8578-2745b5c374bb': {
       Info: {
-        Hostname: 'HI04:-SIR-A001',
+        Hostname: 'HI04-SIR-A001',
         Urls: [
           'http://110.16.41.1:30773/remote'
         ],
@@ -291,7 +291,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI04:-SIR-A001',
+        Device: 'HI04-SIR-A001',
         Session: '14e7da72-1cd9-4565-8578-2745b5c374bb',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -317,7 +317,7 @@ const initialState = {
     },
     '15acd5db-3520-4435-8e0d-379a0c7237f0': {
       Info: {
-        Hostname: 'HI04:-SIR-A001',
+        Hostname: 'HI04-SIR-A001',
         Urls: [
           'http://110.16.41.1:30774/remote'
         ],
@@ -335,7 +335,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI04:-SIR-A001',
+        Device: 'HI04-SIR-A001',
         Session: '15acd5db-3520-4435-8e0d-379a0c7237f0',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -533,7 +533,7 @@ const initialState = {
     },
     '21686478-8627-48db-9731-b8b0cdde4ddc': {
       Info: {
-        Hostname: 'HI04:-SIR-A004',
+        Hostname: 'HI04-SIR-A004',
         Urls: [
           'http://110.16.41.4:30771/remote'
         ],
@@ -551,7 +551,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI04:-SIR-A004',
+        Device: 'HI04-SIR-A004',
         Session: '21686478-8627-48db-9731-b8b0cdde4ddc',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -619,7 +619,7 @@ const initialState = {
     },
     '2c1f8177-8230-4c6c-89c3-26a69f070432': {
       Info: {
-        Hostname: 'HI02:-SIR-A002',
+        Hostname: 'HI02-SIR-A002',
         Urls: [
           'http://110.16.41.2:30775/remote'
         ],
@@ -637,7 +637,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI02:-SIR-A002',
+        Device: 'HI02-SIR-A002',
         Session: '2c1f8177-8230-4c6c-89c3-26a69f070432',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -663,7 +663,7 @@ const initialState = {
     },
     '2e2e4ae4-7cc5-4319-b052-7c3157661d52': {
       Info: {
-        Hostname: 'HI06:-SIR-B002',
+        Hostname: 'HI06-SIR-B002',
         Urls: [
           'http://110.16.41.22:30772/remote'
         ],
@@ -681,7 +681,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI06:-SIR-B002',
+        Device: 'HI06-SIR-B002',
         Session: '2e2e4ae4-7cc5-4319-b052-7c3157661d52',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -707,7 +707,7 @@ const initialState = {
     },
     '2f528661-912f-4d95-8710-ea6ad40bdcc5': {
       Info: {
-        Hostname: 'HI02:-SIR-A002',
+        Hostname: 'HI02-SIR-A002',
         Urls: [
           'http://110.16.41.2:30771/remote'
         ],
@@ -725,7 +725,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI02:-SIR-A002',
+        Device: 'HI02-SIR-A002',
         Session: '2f528661-912f-4d95-8710-ea6ad40bdcc5',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -923,7 +923,7 @@ const initialState = {
     },
     '36121174-0f7e-4377-b9b7-79e7c9332b27': {
       Info: {
-        Hostname: 'HI05:-SIR-B001',
+        Hostname: 'HI05-SIR-B001',
         Urls: [
           'http://110.16.41.21:30771/remote'
         ],
@@ -941,7 +941,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05:-SIR-B001',
+        Device: 'HI05-SIR-B001',
         Session: '36121174-0f7e-4377-b9b7-79e7c9332b27',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -965,7 +965,7 @@ const initialState = {
     },
     '384ff43f-0626-4593-a621-8ffc6a2f0f09': {
       Info: {
-        Hostname: 'HI07:-SIR-B005',
+        Hostname: 'HI07-SIR-B005',
         Urls: [
           'http://110.16.41.25:30776/remote'
         ],
@@ -983,7 +983,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI07:-SIR-B005',
+        Device: 'HI07-SIR-B005',
         Session: '384ff43f-0626-4593-a621-8ffc6a2f0f09',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1007,7 +1007,7 @@ const initialState = {
     },
     '390013cb-d42e-451c-abce-554eb9614693': {
       Info: {
-        Hostname: 'HI07:-SIR-B005',
+        Hostname: 'HI07-SIR-B005',
         Urls: [
           'http://110.16.41.25:30773/remote'
         ],
@@ -1025,7 +1025,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI07:-SIR-B005',
+        Device: 'HI07-SIR-B005',
         Session: '390013cb-d42e-451c-abce-554eb9614693',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1049,7 +1049,7 @@ const initialState = {
     },
     '3934d964-3712-43ef-97ac-9bfae3065bd7': {
       Info: {
-        Hostname: 'HI02:-SIR-A002',
+        Hostname: 'HI02-SIR-A002',
         Urls: [
           'http://110.16.41.2:30773/remote'
         ],
@@ -1067,7 +1067,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI02:-SIR-A002',
+        Device: 'HI02-SIR-A002',
         Session: '3934d964-3712-43ef-97ac-9bfae3065bd7',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1133,7 +1133,7 @@ const initialState = {
     },
     '3ac27c9d-4993-457d-afa4-e8cd133044ed': {
       Info: {
-        Hostname: 'HI04:-SIR-A004',
+        Hostname: 'HI04-SIR-A004',
         Urls: [
           'http://110.16.41.4:30776/remote'
         ],
@@ -1151,7 +1151,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI04:-SIR-A004',
+        Device: 'HI04-SIR-A004',
         Session: '3ac27c9d-4993-457d-afa4-e8cd133044ed',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1175,7 +1175,7 @@ const initialState = {
     },
     '3dbe3390-620b-4b4e-a6f0-fbd7e690047e': {
       Info: {
-        Hostname: 'HI05:-SIR-B001',
+        Hostname: 'HI05-SIR-B001',
         Urls: [
           'http://110.16.41.21:30775/remote'
         ],
@@ -1193,7 +1193,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05:-SIR-B001',
+        Device: 'HI05-SIR-B001',
         Session: '3dbe3390-620b-4b4e-a6f0-fbd7e690047e',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1303,7 +1303,7 @@ const initialState = {
     },
     '44358686-c263-4db3-8112-b7a22ee58cb1': {
       Info: {
-        Hostname: 'HI05:-SIR-B003',
+        Hostname: 'HI05-SIR-B003',
         Urls: [
           'http://110.16.41.23:30775/remote'
         ],
@@ -1321,7 +1321,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05:-SIR-B003',
+        Device: 'HI05-SIR-B003',
         Session: '44358686-c263-4db3-8112-b7a22ee58cb1',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1347,7 +1347,7 @@ const initialState = {
     },
     '44ceda9d-0702-4b7d-9bd3-fc8168f0880a': {
       Info: {
-        Hostname: 'HI02:-SIR-A002',
+        Hostname: 'HI02-SIR-A002',
         Urls: [
           'http://110.16.41.2:30774/remote'
         ],
@@ -1365,7 +1365,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI02:-SIR-A002',
+        Device: 'HI02-SIR-A002',
         Session: '44ceda9d-0702-4b7d-9bd3-fc8168f0880a',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1435,7 +1435,7 @@ const initialState = {
     },
     '4b66769d-eeb8-40c5-8e3f-f6c25bfd83ea': {
       Info: {
-        Hostname: 'HI04:-SIR-A001',
+        Hostname: 'HI04-SIR-A001',
         Urls: [
           'http://110.16.41.1:30772/remote'
         ],
@@ -1453,7 +1453,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI04:-SIR-A001',
+        Device: 'HI04-SIR-A001',
         Session: '4b66769d-eeb8-40c5-8e3f-f6c25bfd83ea',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1477,7 +1477,7 @@ const initialState = {
     },
     '4bfcc8a0-72ea-42c6-95e8-6c449f3c8414': {
       Info: {
-        Hostname: 'HI04:-SIR-A001',
+        Hostname: 'HI04-SIR-A001',
         Urls: [
           'http://110.16.41.1:30776/remote'
         ],
@@ -1495,7 +1495,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI04:-SIR-A001',
+        Device: 'HI04-SIR-A001',
         Session: '4bfcc8a0-72ea-42c6-95e8-6c449f3c8414',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1519,7 +1519,7 @@ const initialState = {
     },
     '4c7b433a-69e8-4e49-84fa-6c8b0e396526': {
       Info: {
-        Hostname: 'HI04:-SIR-A004',
+        Hostname: 'HI04-SIR-A004',
         Urls: [
           'http://110.16.41.4:30772/remote'
         ],
@@ -1537,7 +1537,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI04:-SIR-A004',
+        Device: 'HI04-SIR-A004',
         Session: '4c7b433a-69e8-4e49-84fa-6c8b0e396526',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1561,7 +1561,7 @@ const initialState = {
     },
     '4d07a95e-14ad-41ca-ac27-24ec103636c7': {
       Info: {
-        Hostname: 'HI06:-SIR-B002',
+        Hostname: 'HI06-SIR-B002',
         Urls: [
           'http://110.16.41.22:30776/remote'
         ],
@@ -1579,7 +1579,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI06:-SIR-B002',
+        Device: 'HI06-SIR-B002',
         Session: '4d07a95e-14ad-41ca-ac27-24ec103636c7',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1647,7 +1647,7 @@ const initialState = {
     },
     '52de30e6-3591-4154-a319-50807526f231': {
       Info: {
-        Hostname: 'HI03:-SIR-A003',
+        Hostname: 'HI03-SIR-A003',
         Urls: [
           'http://110.16.41.3:30776/remote'
         ],
@@ -1665,7 +1665,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI03:-SIR-A003',
+        Device: 'HI03-SIR-A003',
         Session: '52de30e6-3591-4154-a319-50807526f231',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1733,7 +1733,7 @@ const initialState = {
     },
     '53c12fbb-f8cd-4703-b35f-8740eccd9be8': {
       Info: {
-        Hostname: 'HI06:-SIR-B004',
+        Hostname: 'HI06-SIR-B004',
         Urls: [
           'http://110.16.41.24:30773/remote'
         ],
@@ -1751,7 +1751,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI06:-SIR-B004',
+        Device: 'HI06-SIR-B004',
         Session: '53c12fbb-f8cd-4703-b35f-8740eccd9be8',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1865,7 +1865,7 @@ const initialState = {
     },
     '564bb673-2911-4fde-823d-993a40fee0b4': {
       Info: {
-        Hostname: 'HI04:-SIR-A004',
+        Hostname: 'HI04-SIR-A004',
         Urls: [
           'http://110.16.41.4:30774/remote'
         ],
@@ -1883,7 +1883,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI04:-SIR-A004',
+        Device: 'HI04-SIR-A004',
         Session: '564bb673-2911-4fde-823d-993a40fee0b4',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -1909,7 +1909,7 @@ const initialState = {
     },
     '5b7cf013-0d2c-4b17-9e73-be80be7fa54a': {
       Info: {
-        Hostname: 'HI05:-SIR-B001',
+        Hostname: 'HI05-SIR-B001',
         Urls: [
           'http://110.16.41.21:30773/remote'
         ],
@@ -1927,7 +1927,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05:-SIR-B001',
+        Device: 'HI05-SIR-B001',
         Session: '5b7cf013-0d2c-4b17-9e73-be80be7fa54a',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -2125,7 +2125,7 @@ const initialState = {
     },
     '6c39ab9e-3b62-4b5f-8089-58f7c5562398': {
       Info: {
-        Hostname: 'HI03:-SIR-A003',
+        Hostname: 'HI03-SIR-A003',
         Urls: [
           'http://110.16.41.3:30774/remote'
         ],
@@ -2143,7 +2143,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI03:-SIR-A003',
+        Device: 'HI03-SIR-A003',
         Session: '6c39ab9e-3b62-4b5f-8089-58f7c5562398',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -2297,7 +2297,7 @@ const initialState = {
     },
     '736c8986-733e-4293-bb03-a143355d972b': {
       Info: {
-        Hostname: 'HI05:-SIR-B003',
+        Hostname: 'HI05-SIR-B003',
         Urls: [
           'http://110.16.41.23:30771/remote'
         ],
@@ -2315,7 +2315,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05:-SIR-B003',
+        Device: 'HI05-SIR-B003',
         Session: '736c8986-733e-4293-bb03-a143355d972b',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -2425,7 +2425,7 @@ const initialState = {
     },
     '7895eeae-8d8e-44b0-b7ec-b102ff97176c': {
       Info: {
-        Hostname: 'HI02:-SIR-A002',
+        Hostname: 'HI02-SIR-A002',
         Urls: [
           'http://110.16.41.2:30776/remote'
         ],
@@ -2443,7 +2443,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI02:-SIR-A002',
+        Device: 'HI02-SIR-A002',
         Session: '7895eeae-8d8e-44b0-b7ec-b102ff97176c',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -2553,7 +2553,7 @@ const initialState = {
     },
     '832380a9-45e5-4971-845a-1eecb78240f7': {
       Info: {
-        Hostname: 'HI06:-SIR-B004',
+        Hostname: 'HI06-SIR-B004',
         Urls: [
           'http://110.16.41.24:30774/remote'
         ],
@@ -2571,7 +2571,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI06:-SIR-B004',
+        Device: 'HI06-SIR-B004',
         Session: '832380a9-45e5-4971-845a-1eecb78240f7',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -2637,7 +2637,7 @@ const initialState = {
     },
     '898aeeb2-b9d2-4395-993d-2c4c68fc04fc': {
       Info: {
-        Hostname: 'HI05:-SIR-B001',
+        Hostname: 'HI05-SIR-B001',
         Urls: [
           'http://110.16.41.21:30776/remote'
         ],
@@ -2655,7 +2655,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05:-SIR-B001',
+        Device: 'HI05-SIR-B001',
         Session: '898aeeb2-b9d2-4395-993d-2c4c68fc04fc',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -2736,7 +2736,7 @@ const initialState = {
     },
     '9302fcc0-0f22-43ec-9968-4fe5e32613cc': {
       Info: {
-        Hostname: 'HI04:-SIR-A004',
+        Hostname: 'HI04-SIR-A004',
         Urls: [
           'http://110.16.41.4:30775/remote'
         ],
@@ -2754,7 +2754,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI04:-SIR-A004',
+        Device: 'HI04-SIR-A004',
         Session: '9302fcc0-0f22-43ec-9968-4fe5e32613cc',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -2780,7 +2780,7 @@ const initialState = {
     },
     '961766ca-da35-45ba-a7db-c82ff16c396b': {
       Info: {
-        Hostname: 'HI06:-SIR-B002',
+        Hostname: 'HI06-SIR-B002',
         Urls: [
           'http://110.16.41.22:30774/remote'
         ],
@@ -2798,7 +2798,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI06:-SIR-B002',
+        Device: 'HI06-SIR-B002',
         Session: '961766ca-da35-45ba-a7db-c82ff16c396b',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -2822,7 +2822,7 @@ const initialState = {
     },
     '9659e5bb-2349-4dd2-8dbf-b2b56ab7875d': {
       Info: {
-        Hostname: 'HI04:-SIR-A001',
+        Hostname: 'HI04-SIR-A001',
         Urls: [
           'http://110.16.41.1:30775/remote'
         ],
@@ -2840,7 +2840,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI04:-SIR-A001',
+        Device: 'HI04-SIR-A001',
         Session: '9659e5bb-2349-4dd2-8dbf-b2b56ab7875d',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -2952,7 +2952,7 @@ const initialState = {
     },
     '98c41e39-adf2-4e39-8bf2-8b2defd7514a': {
       Info: {
-        Hostname: 'HI04:-SIR-A001',
+        Hostname: 'HI04-SIR-A001',
         Urls: [
           'http://110.16.41.1:30771/remote'
         ],
@@ -2970,7 +2970,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI04:-SIR-A001',
+        Device: 'HI04-SIR-A001',
         Session: '98c41e39-adf2-4e39-8bf2-8b2defd7514a',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -3124,7 +3124,7 @@ const initialState = {
     },
     'a5733f15-ede8-447b-a4be-7758ea711aa6': {
       Info: {
-        Hostname: 'HI05:-SIR-B001',
+        Hostname: 'HI05-SIR-B001',
         Urls: [
           'http://110.16.41.21:30772/remote'
         ],
@@ -3142,7 +3142,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05:-SIR-B001',
+        Device: 'HI05-SIR-B001',
         Session: 'a5733f15-ede8-447b-a4be-7758ea711aa6',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -3166,7 +3166,7 @@ const initialState = {
     },
     'a5d21d4a-56b1-4791-a07f-41c2915b496b': {
       Info: {
-        Hostname: 'HI03:-SIR-A003',
+        Hostname: 'HI03-SIR-A003',
         Urls: [
           'http://110.16.41.3:30775/remote'
         ],
@@ -3184,7 +3184,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI03:-SIR-A003',
+        Device: 'HI03-SIR-A003',
         Session: 'a5d21d4a-56b1-4791-a07f-41c2915b496b',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -3294,7 +3294,7 @@ const initialState = {
     },
     'b053f1d4-2f1e-446d-afe0-6a909c5e29a6': {
       Info: {
-        Hostname: 'HI05:-SIR-B003',
+        Hostname: 'HI05-SIR-B003',
         Urls: [
           'http://110.16.41.23:30776/remote'
         ],
@@ -3312,7 +3312,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05:-SIR-B003',
+        Device: 'HI05-SIR-B003',
         Session: 'b053f1d4-2f1e-446d-afe0-6a909c5e29a6',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -3338,7 +3338,7 @@ const initialState = {
     },
     'b0f5adee-1245-4ba3-a6ae-0c7563141248': {
       Info: {
-        Hostname: 'HI06:-SIR-B004',
+        Hostname: 'HI06-SIR-B004',
         Urls: [
           'http://110.16.41.24:30776/remote'
         ],
@@ -3356,7 +3356,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI06:-SIR-B004',
+        Device: 'HI06-SIR-B004',
         Session: 'b0f5adee-1245-4ba3-a6ae-0c7563141248',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -3468,7 +3468,7 @@ const initialState = {
     },
     'b7e1b0b8-4d4e-41d7-9d9e-42c493af93cd': {
       Info: {
-        Hostname: 'HI06:-SIR-B004',
+        Hostname: 'HI06-SIR-B004',
         Urls: [
           'http://110.16.41.24:30775/remote'
         ],
@@ -3486,7 +3486,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI06:-SIR-B004',
+        Device: 'HI06-SIR-B004',
         Session: 'b7e1b0b8-4d4e-41d7-9d9e-42c493af93cd',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -3554,7 +3554,7 @@ const initialState = {
     },
     'be906e33-64b4-4fab-b3a1-593a5a751f15': {
       Info: {
-        Hostname: 'HI03:-SIR-A003',
+        Hostname: 'HI03-SIR-A003',
         Urls: [
           'http://110.16.41.3:30771/remote'
         ],
@@ -3572,7 +3572,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI03:-SIR-A003',
+        Device: 'HI03-SIR-A003',
         Session: 'be906e33-64b4-4fab-b3a1-593a5a751f15',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -3598,7 +3598,7 @@ const initialState = {
     },
     'c0d0a691-acee-4a58-b954-b2b5e08ee393': {
       Info: {
-        Hostname: 'HI05:-SIR-B001',
+        Hostname: 'HI05-SIR-B001',
         Urls: [
           'http://110.16.41.21:30774/remote'
         ],
@@ -3616,7 +3616,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05:-SIR-B001',
+        Device: 'HI05-SIR-B001',
         Session: 'c0d0a691-acee-4a58-b954-b2b5e08ee393',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -3642,7 +3642,7 @@ const initialState = {
     },
     'c2254030-4b20-42d2-a6c3-5a0bf27b5b29': {
       Info: {
-        Hostname: 'HI05:-SIR-B003',
+        Hostname: 'HI05-SIR-B003',
         Urls: [
           'http://110.16.41.23:30772/remote'
         ],
@@ -3660,7 +3660,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05:-SIR-B003',
+        Device: 'HI05-SIR-B003',
         Session: 'c2254030-4b20-42d2-a6c3-5a0bf27b5b29',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -3684,7 +3684,7 @@ const initialState = {
     },
     'c27a9ac0-15ab-4e9c-a0af-b4cf83a4f151': {
       Info: {
-        Hostname: 'HI04:-SIR-A004',
+        Hostname: 'HI04-SIR-A004',
         Urls: [
           'http://110.16.41.4:30773/remote'
         ],
@@ -3702,7 +3702,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI04:-SIR-A004',
+        Device: 'HI04-SIR-A004',
         Session: 'c27a9ac0-15ab-4e9c-a0af-b4cf83a4f151',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -4074,7 +4074,7 @@ const initialState = {
     },
     'e117e2cc-7b13-45c7-a10c-511c90b91548': {
       Info: {
-        Hostname: 'HI05:-SIR-B003',
+        Hostname: 'HI05-SIR-B003',
         Urls: [
           'http://110.16.41.23:30774/remote'
         ],
@@ -4092,7 +4092,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05:-SIR-B003',
+        Device: 'HI05-SIR-B003',
         Session: 'e117e2cc-7b13-45c7-a10c-511c90b91548',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -4116,7 +4116,7 @@ const initialState = {
     },
     'e20bf879-6065-4bb8-ab92-aed6192fa7bd': {
       Info: {
-        Hostname: 'HI06:-SIR-B004',
+        Hostname: 'HI06-SIR-B004',
         Urls: [
           'http://110.16.41.24:30771/remote'
         ],
@@ -4134,7 +4134,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI06:-SIR-B004',
+        Device: 'HI06-SIR-B004',
         Session: 'e20bf879-6065-4bb8-ab92-aed6192fa7bd',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -4160,7 +4160,7 @@ const initialState = {
     },
     'e24a5507-0a31-4c48-8d47-26f256471c30': {
       Info: {
-        Hostname: 'HI06:-SIR-B004',
+        Hostname: 'HI06-SIR-B004',
         Urls: [
           'http://110.16.41.24:30772/remote'
         ],
@@ -4178,7 +4178,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI06:-SIR-B004',
+        Device: 'HI06-SIR-B004',
         Session: 'e24a5507-0a31-4c48-8d47-26f256471c30',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -4244,7 +4244,7 @@ const initialState = {
     },
     'e48396cd-bcf4-4d43-8ea5-cdc2884ad2be': {
       Info: {
-        Hostname: 'HI07:-SIR-B005',
+        Hostname: 'HI07-SIR-B005',
         Urls: [
           'http://110.16.41.25:30772/remote'
         ],
@@ -4262,7 +4262,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI07:-SIR-B005',
+        Device: 'HI07-SIR-B005',
         Session: 'e48396cd-bcf4-4d43-8ea5-cdc2884ad2be',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -4330,7 +4330,7 @@ const initialState = {
     },
     'ebf18725-2ece-4596-9fb0-216517da0886': {
       Info: {
-        Hostname: 'HI02:-SIR-A002',
+        Hostname: 'HI02-SIR-A002',
         Urls: [
           'http://110.16.41.2:30772/remote'
         ],
@@ -4348,7 +4348,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI02:-SIR-A002',
+        Device: 'HI02-SIR-A002',
         Session: 'ebf18725-2ece-4596-9fb0-216517da0886',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -4416,7 +4416,7 @@ const initialState = {
     },
     'ee840830-1d4b-41e7-92c8-ff441454fd5c': {
       Info: {
-        Hostname: 'HI06:-SIR-B002',
+        Hostname: 'HI06-SIR-B002',
         Urls: [
           'http://110.16.41.22:30771/remote'
         ],
@@ -4434,7 +4434,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI06:-SIR-B002',
+        Device: 'HI06-SIR-B002',
         Session: 'ee840830-1d4b-41e7-92c8-ff441454fd5c',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -4502,7 +4502,7 @@ const initialState = {
     },
     'f35af703-dcd0-450b-81ae-0bdf10736030': {
       Info: {
-        Hostname: 'HI07:-SIR-B005',
+        Hostname: 'HI07-SIR-B005',
         Urls: [
           'http://110.16.41.25:30774/remote'
         ],
@@ -4520,7 +4520,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI07:-SIR-B005',
+        Device: 'HI07-SIR-B005',
         Session: 'f35af703-dcd0-450b-81ae-0bdf10736030',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -4546,7 +4546,7 @@ const initialState = {
     },
     'f477f2e6-03ee-467e-9fa7-0a9ea2d7289a': {
       Info: {
-        Hostname: 'HI05:-SIR-B003',
+        Hostname: 'HI05-SIR-B003',
         Urls: [
           'http://110.16.41.23:30773/remote'
         ],
@@ -4564,7 +4564,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05:-SIR-B003',
+        Device: 'HI05-SIR-B003',
         Session: 'f477f2e6-03ee-467e-9fa7-0a9ea2d7289a',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -4588,7 +4588,7 @@ const initialState = {
     },
     'f57068f3-6e3f-445c-a393-958d999e5aa6': {
       Info: {
-        Hostname: 'HI07:-SIR-B005',
+        Hostname: 'HI07-SIR-B005',
         Urls: [
           'http://110.16.41.25:30775/remote'
         ],
@@ -4606,7 +4606,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI07:-SIR-B005',
+        Device: 'HI07-SIR-B005',
         Session: 'f57068f3-6e3f-445c-a393-958d999e5aa6',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -4672,7 +4672,7 @@ const initialState = {
     },
     'ff2817b3-fa37-43dc-a993-771581d99da4': {
       Info: {
-        Hostname: 'HI03:-SIR-A003',
+        Hostname: 'HI03-SIR-A003',
         Urls: [
           'http://110.16.41.3:30772/remote'
         ],
@@ -4690,7 +4690,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI03:-SIR-A003',
+        Device: 'HI03-SIR-A003',
         Session: 'ff2817b3-fa37-43dc-a993-771581d99da4',
         TaskTypes: {
           'seal/v0/commit/1': {},

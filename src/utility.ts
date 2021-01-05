@@ -13,3 +13,19 @@ shortNames.set('seal/v0/unsealread', 'UnsealRead');
 export const taskShortName = (task: string): string | undefined => {
     return shortNames.get(task);
 }
+
+const shortShortNames = new Map<string, string>();
+shortShortNames.set('seal/v0/addpiece', 'AP');
+shortShortNames.set('seal/v0/hkcaddpiece', 'APH');
+shortShortNames.set('seal/v0/precommit/1', 'PC1');
+shortShortNames.set('seal/v0/precommit/2', 'PC2');
+shortShortNames.set('seal/v0/commit/1', 'C1');
+shortShortNames.set('seal/v0/commit/2', 'C2');
+shortShortNames.set('seal/v0/finalize', 'FIN');
+shortShortNames.set('seal/v0/fetch', 'GET');
+shortShortNames.set('seal/v0/unseal', 'UNS');
+shortShortNames.set('seal/v0/unsealread', 'URD');
+
+export const taskShortShortName = (task: string): string | undefined => {
+    return shortShortNames.get(task);
+}
