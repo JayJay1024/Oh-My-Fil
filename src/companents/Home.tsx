@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Antd
 import { Card, Divider, Button, Spin, message } from "antd";
-import { ReloadOutlined } from '@ant-design/icons';
+import { ReloadOutlined, MoreOutlined } from '@ant-design/icons';
 
 import '../App.less';
 import bytes from 'bytes';
 import { taskShortName } from '../utility';
+import { Link } from 'react-router-dom';
 
 // Reducers
 import { selectConnectInfo } from '../reducers/connectInfoSlice';
@@ -123,19 +124,25 @@ const Home: FC = () => {
 
   return (
     <div className='oh-my-fil-home-content'>
-      <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchSectorsSummary(connectInfo))}>Sectors Summary</Button>}
-        extra={sectorsSummary.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
-        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+      <Spin
+        size='large' delay={200}
+        spinning={sectorsSummary.status === 'loading' ? true : false}
       >
-        {Object.keys(sectorsSummary.data).map((key: string) => {
-          return (
-            <div className='oh-my-fil-home-card-item' key={key}>
-              <div>{key}:</div>
-              <div>{sectorsSummary.data[key]}</div>
-            </div>
-          )
-        })}
-      </Card>
+        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchSectorsSummary(connectInfo))}>Sectors Summary</Button>}
+          extra={<Link to='/sectors'><MoreOutlined /></Link>}
+          hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+        >
+          {Object.keys(sectorsSummary.data).map((key: string) => {
+            return (
+              <div className='oh-my-fil-home-card-item' key={key}>
+                <div>{key}:</div>
+                <div>{sectorsSummary.data[key]}</div>
+              </div>
+            )
+          })}
+        </Card>
+      </Spin>
+
       <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerPower}>Miner Power</Button>}
         extra={sectorCount.status === 'loading' || minerRecoveries.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
         hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
@@ -167,6 +174,7 @@ const Home: FC = () => {
           <div>{winPerDay.toFixed(4)}/day</div>
         </div>
       </Card>
+
       <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerBalance}>Miner Balance</Button>}
         extra={actorState.status === 'loading' || minerAvailableBalance.status === 'loading' || workerBalance.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
         hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
@@ -206,6 +214,7 @@ const Home: FC = () => {
           <div>{nano2fil(workerBalance.data.control)} FIL</div>
         </div>
       </Card>
+
       <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerJobs(connectInfo))}>Tasks Count</Button>}
         extra={workerJobs.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
         hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
@@ -219,19 +228,25 @@ const Home: FC = () => {
           )
         })}
       </Card>
-      <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerStat(connectInfo))}>Worker Count</Button>}
-        extra={workerStat.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
-        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+
+      <Spin
+        size='large' delay={200}
+        spinning={workerStat.status === 'loading' ? true : false}
       >
-        {Object.keys(workerCount).map((key: string) => {
-          return (
-            <div className='oh-my-fil-home-card-item' key={key}>
-              <div>{key}:</div>
-              <div>{workerCount[key]}</div>
-            </div>
-          )
-        })}
-      </Card>
+        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerStat(connectInfo))}>Worker Count</Button>}
+          extra={<Link to='/workers'><MoreOutlined /></Link>}
+          hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+        >
+          {Object.keys(workerCount).map((key: string) => {
+            return (
+              <div className='oh-my-fil-home-card-item' key={key}>
+                <div>{key}:</div>
+                <div>{workerCount[key]}</div>
+              </div>
+            )
+          })}
+        </Card>
+      </Spin>
     </div>
   );
 };
