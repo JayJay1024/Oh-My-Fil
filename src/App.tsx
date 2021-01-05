@@ -64,9 +64,9 @@ const App: FC = () => {
   }, [connectInfo, actorAddress, dispatch]);
 
   return (
-    <Layout className='my-fil-layout'>
+    <Layout className='oh-my-fil-layout'>
       <Router>
-        <Header className='my-fil-header'>
+        <Header className='oh-my-fil-header'>
           <Menu theme='light' mode='horizontal' onClick={handleClickMenu} defaultSelectedKeys={['home']}>
             <Menu.Item key='home'>
               <Link to="/">Home</Link>
@@ -85,13 +85,13 @@ const App: FC = () => {
             <Menu.Item key='node'>{actorAddress.length ? <><UserOutlined />{actorAddress} ({bytes(actorInfo.data.actorSectorSize)})</> : <>Connect</>}</Menu.Item>
           </Menu>
           <Modal closable={false} visible={visibleConnectInfoModal} title='Node Info' onOk={handleOKModalConnectInfo} onCancel={() => setVisibleConnectInfoModal(false)}>
-            <Input allowClear={true} defaultValue={connectInfo.lotusApi} onChange={handleChangeLotusApi} className='my-fil-node-info-button' placeholder='lotus api like 127.0.0.1:1234' />
-            <Input allowClear={true} defaultValue={connectInfo.minerApi} onChange={handleChangeMinerApi} className='my-fil-node-info-button' placeholder='miner api like 127.0.0.1:2345' />
-            <Input allowClear={true} defaultValue={connectInfo.lotusToken} onChange={handleChangeLotusToken} className='my-fil-node-info-button' placeholder='lotus token' />
-            <Input allowClear={true} defaultValue={connectInfo.minerToken} onChange={handleChangeMinerToken} className='my-fil-node-info-button' placeholder='miner token' />
+            <Input allowClear={true} defaultValue={connectInfo.lotusApi} onChange={handleChangeLotusApi} className='oh-my-fil-node-info-button' placeholder='lotus api like 127.0.0.1:1234' />
+            <Input allowClear={true} defaultValue={connectInfo.minerApi} onChange={handleChangeMinerApi} className='oh-my-fil-node-info-button' placeholder='miner api like 127.0.0.1:2345' />
+            <Input allowClear={true} defaultValue={connectInfo.lotusToken} onChange={handleChangeLotusToken} className='oh-my-fil-node-info-button' placeholder='lotus token' />
+            <Input allowClear={true} defaultValue={connectInfo.minerToken} onChange={handleChangeMinerToken} className='oh-my-fil-node-info-button' placeholder='miner token' />
           </Modal>
         </Header>
-        <Content className='my-fil-content'>
+        <Content className='oh-my-fil-content'>
           <Switch>
             <Route path='/workers'>
               <Workers></Workers>
@@ -101,8 +101,8 @@ const App: FC = () => {
             </Route>
           </Switch>
         </Content>
-        <Footer className='my-fil-footer'>
-          My Fil ©2020 Created by Jay
+        <Footer className='oh-my-fil-footer'>
+          Oh My Fil ©2020 Created by Jay
       </Footer>
       </Router>
     </Layout>

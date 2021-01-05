@@ -122,14 +122,14 @@ const Home: FC = () => {
   workerCount['Total'] = totalWorker;
 
   return (
-    <div className='my-fil-home-content'>
+    <div className='oh-my-fil-home-content'>
       <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchSectorsSummary(connectInfo))}>Sectors Summary</Button>}
         extra={sectorsSummary.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
-        hoverable={true} bordered={false} size='small' className='my-fil-home-card'
+        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
       >
         {Object.keys(sectorsSummary.data).map((key: string) => {
           return (
-            <div className='my-fil-home-card-item' key={key}>
+            <div className='oh-my-fil-home-card-item' key={key}>
               <div>{key}:</div>
               <div>{sectorsSummary.data[key]}</div>
             </div>
@@ -138,81 +138,81 @@ const Home: FC = () => {
       </Card>
       <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerPower}>Miner Power</Button>}
         extra={sectorCount.status === 'loading' || minerRecoveries.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
-        hoverable={true} bordered={false} size='small' className='my-fil-home-card'
+        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
       >
         <Divider plain style={{ margin: '0px' }}>Power:</Divider>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Growth:</div>
           <div>{bytes((sectorCount.data.Live - sectorCount.data.Active) * actorInfo.data.actorSectorSize)}</div>
         </div>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Committed:</div>
           <div>{bytes(sectorCount.data.Live * actorInfo.data.actorSectorSize)}</div>
         </div>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Proving:</div>
           <div>{bytes(sectorCount.data.Active * actorInfo.data.actorSectorSize)}</div>
         </div>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Faulty:</div>
           <div>{bytes(sectorCount.data.Faulty * actorInfo.data.actorSectorSize)}</div>
         </div>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Recoveries:</div>
           <div>{bytes(minerRecoveries.data[0] * actorInfo.data.actorSectorSize)}</div>
         </div>
         <Divider plain style={{ margin: '0px' }}>Expected:</Divider>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Win Rate:</div>
           <div>{winPerDay.toFixed(4)}/day</div>
         </div>
       </Card>
       <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerBalance}>Miner Balance</Button>}
         extra={actorState.status === 'loading' || minerAvailableBalance.status === 'loading' || workerBalance.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
-        hoverable={true} bordered={false} size='small' className='my-fil-home-card'
+        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
       >
         <Divider plain style={{ margin: '0px' }}>Miner Balance:</Divider>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Total:</div>
           <div>{nano2fil(actorState.data.Balance)} FIL</div>
         </div>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>PreCommit:</div>
           <div>{nano2fil(actorState.data.State.PreCommitDeposits)} FIL</div>
         </div>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Pledge:</div>
           <div>{nano2fil(actorState.data.State.InitialPledge)} FIL</div>
         </div>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Vesting:</div>
           <div>{nano2fil(actorState.data.State.LockedFunds)} FIL</div>
         </div>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Available:</div>
           <div>{nano2fil(minerAvailableBalance.data)} FIL</div>
         </div>
         <Divider plain style={{ margin: '0px' }}>Worker Balance:</Divider>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Owner:</div>
           <div>{nano2fil(workerBalance.data.owner)} FIL</div>
         </div>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Worker:</div>
           <div>{nano2fil(workerBalance.data.worker)} FIL</div>
         </div>
-        <div className='my-fil-home-card-item'>
+        <div className='oh-my-fil-home-card-item'>
           <div>Control:</div>
           <div>{nano2fil(workerBalance.data.control)} FIL</div>
         </div>
       </Card>
       <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerJobs(connectInfo))}>Tasks Count</Button>}
         extra={workerJobs.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
-        hoverable={true} bordered={false} size='small' className='my-fil-home-card'
+        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
       >
         {Object.keys(taskCount).map((key: string) => {
           return (
-            <div className='my-fil-home-card-item' key={key}>
+            <div className='oh-my-fil-home-card-item' key={key}>
               <div>{key}:</div>
               <div>{taskCount[key]}</div>
             </div>
@@ -221,11 +221,11 @@ const Home: FC = () => {
       </Card>
       <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerStat(connectInfo))}>Worker Count</Button>}
         extra={workerStat.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
-        hoverable={true} bordered={false} size='small' className='my-fil-home-card'
+        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
       >
         {Object.keys(workerCount).map((key: string) => {
           return (
-            <div className='my-fil-home-card-item' key={key}>
+            <div className='oh-my-fil-home-card-item' key={key}>
               <div>{key}:</div>
               <div>{workerCount[key]}</div>
             </div>

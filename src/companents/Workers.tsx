@@ -21,7 +21,7 @@ const Worker: FC = () => {
   useEffect(() => { if (workerStat.status === 'failed') { message.error(workerStat.error) } }, [workerStat]);
 
   return (
-    <div className='my-fil-workers-content'>
+    <div className='oh-my-fil-workers-content'>
       <Spin delay={200} size='large' spinning={workerStat.status === 'loading' ? true : false}>
         <PageHeader
           title=''
