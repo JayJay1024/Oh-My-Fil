@@ -2,8 +2,8 @@ import { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Antd
-import { Card, Divider, Button, Spin, message } from "antd";
-import { ReloadOutlined, MoreOutlined } from '@ant-design/icons';
+import { Card, Divider, Button, Spin, Tooltip, message } from "antd";
+import { ReloadOutlined, MoreOutlined, WarningOutlined } from '@ant-design/icons';
 
 import '../App.less';
 import bytes from 'bytes';
@@ -233,7 +233,10 @@ const Home: FC = () => {
         size='large' delay={200}
         spinning={workerStat.status === 'loading' ? true : false}
       >
-        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerStat(connectInfo))}>Worker Count</Button>}
+        <Card title={<Tooltip title='这里不要频繁刷新，关联调度程序锁会导致卡很久'>
+          <Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerStat(connectInfo))}>Worker Count</Button>
+          <WarningOutlined />
+        </Tooltip>}
           extra={<Link to='/workers'><MoreOutlined /></Link>}
           hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
         >
