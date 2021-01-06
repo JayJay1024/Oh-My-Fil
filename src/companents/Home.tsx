@@ -119,7 +119,9 @@ const Home: FC = () => {
         spinning={sectorsSummary.status === 'loading' ? true : false}
       >
         <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchSectorsSummary(connectInfo))}>Sectors Summary</Button>}
-          extra={<Link to='/sectors'><MoreOutlined /></Link>}
+          extra={<Tooltip title='More'>
+            <Link to='/sectors'><MoreOutlined /></Link>
+          </Tooltip>}
           hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
         >
           {Object.keys(sectorsSummary.data).map((key: string) => {
@@ -210,7 +212,9 @@ const Home: FC = () => {
         spinning={workerJobs.status === 'loading' ? true : false}
       >
         <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerJobs(connectInfo))}>Tasks Count</Button>}
-          extra={<Link to='/jobs'><MoreOutlined /></Link>}
+          extra={<Tooltip title='More'>
+            <Link to='/jobs'><MoreOutlined /></Link>
+          </Tooltip>}
           hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
         >
           {Object.keys(taskCount).map((key: string) => {
@@ -232,7 +236,9 @@ const Home: FC = () => {
           <Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerStat(connectInfo))}>Worker Count</Button>
           <WarningOutlined />
         </Tooltip>}
-          extra={<Link to='/workers'><MoreOutlined /></Link>}
+          extra={<Tooltip title='More'>
+            <Link to='/workers'><MoreOutlined /></Link>
+          </Tooltip>}
           hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
         >
           {Object.keys(workerCount).map((key: string) => {
