@@ -18,6 +18,8 @@ import Home from './companents/Home';
 import Jobs from './companents/Jobs';
 import Workers from './companents/Workers';
 import Proving from './companents/Proving';
+import Sectors from './companents/Sectors';
+import Storage from './companents/Storage';
 
 // Reducers
 import {
@@ -71,11 +73,11 @@ const App: FC = () => {
         <Header className='oh-my-fil-header'>
           <Menu theme='light' mode='horizontal' onClick={handleClickMenu} defaultSelectedKeys={['home']}>
             <Menu.Item key='home'><Link to="/">Home</Link></Menu.Item>
-            <Menu.Item key='workers'><Link to="/workers">Workers</Link></Menu.Item>
             <Menu.Item key='jobs'><Link to="/jobs">Jobs</Link></Menu.Item>
-            <Menu.Item key='storages'>Storages</Menu.Item>
             <Menu.Item key='proving'><Link to="/proving">Proving</Link></Menu.Item>
-            <Menu.Item key='sectors'>Sectors</Menu.Item>
+            <Menu.Item key='workers'><Link to="/workers">Workers</Link></Menu.Item>
+            <Menu.Item key='storages'><Link to="/storages">Storages</Link></Menu.Item>
+            <Menu.Item key='sectors'><Link to="/sectors">Sectors</Link></Menu.Item>
           </Menu>
           <Divider type='vertical' style={{ height: '60%' }} />
           <Divider type='vertical' style={{ height: '60%' }} />
@@ -99,6 +101,12 @@ const App: FC = () => {
             </Route>
             <Route path='/jobs'>
               <Jobs />
+            </Route>
+            <Route path='/storages'>
+              <Storage />
+            </Route>
+            <Route path='/sectors'>
+              <Sectors />
             </Route>
             <Route path='/'>
               <Home></Home>
