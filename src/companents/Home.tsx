@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Antd
-import { Card, Divider, Button, Spin, Tooltip } from "antd";
-import { ReloadOutlined, MoreOutlined, WarningOutlined } from '@ant-design/icons';
+import { Card, Divider, Button, Spin, Tooltip, Badge } from "antd";
+import { ReloadOutlined, MoreOutlined, WarningOutlined, SettingOutlined } from '@ant-design/icons';
 
 import '../App.less';
 import bytes from 'bytes';
@@ -244,6 +244,27 @@ const Home: FC = () => {
             )
           })}
         </Card>
+      </Spin>
+
+      <Spin
+        size='large' delay={200}
+        spinning={false}
+      >
+        <Badge.Ribbon text='Fake data, todo'>
+          <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => {}}>Auto Pledge</Button>}
+            extra={<SettingOutlined />}
+            hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+          >
+            <div className='oh-my-fil-home-card-item' key='status'>
+              <div>Status:</div>
+              <div>Enable</div>
+            </div>
+            <div className='oh-my-fil-home-card-item' key='time'>
+              <div>Time:</div>
+              <div>100 seconds</div>
+            </div>
+          </Card>
+        </Badge.Ribbon>
       </Spin>
     </div>
   );
