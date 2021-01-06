@@ -20,6 +20,9 @@ import minerRecoveriesReducer from './reducers/minerRecoveriesSlice';
 import actorStateReducer from './reducers/actorStateSlice';
 import minerInfoReducer from './reducers/minerInfoSlice';
 import workerBalanceReducer from './reducers/workerBalanceSlice';
+import provingDeadlineReducer from './reducers/provingDeadlineSlice';
+import minerDeadlinesReducer from './reducers/minerDeadlinesSlice';
+import deadlinesPartitionReducer from './reducers/deadlinesPartitionsSlice';
 
 export default configureStore({
   reducer: {
@@ -44,5 +47,8 @@ export default configureStore({
     actorState: actorStateReducer,
     minerInfo: minerInfoReducer,
     workerBalance: workerBalanceReducer,
+    provingDeadline: provingDeadlineReducer,
+    minerDeadlines: minerDeadlinesReducer,
+    deadlinesPartition: deadlinesPartitionReducer,
   },
 });

@@ -16,6 +16,7 @@ import {
 // Companents
 import Home from './companents/Home';
 import Workers from './companents/Workers';
+import Proving from './companents/Proving';
 
 // Reducers
 import {
@@ -68,15 +69,11 @@ const App: FC = () => {
       <Router>
         <Header className='oh-my-fil-header'>
           <Menu theme='light' mode='horizontal' onClick={handleClickMenu} defaultSelectedKeys={['home']}>
-            <Menu.Item key='home'>
-              <Link to="/">Home</Link>
-            </Menu.Item>
-            <Menu.Item key='workers'>
-              <Link to="/workers">Workers</Link>
-            </Menu.Item>
+            <Menu.Item key='home'><Link to="/">Home</Link></Menu.Item>
+            <Menu.Item key='workers'><Link to="/workers">Workers</Link></Menu.Item>
             <Menu.Item key='jobs'>Jobs</Menu.Item>
             <Menu.Item key='storages'>Storages</Menu.Item>
-            <Menu.Item key='proving'>Proving</Menu.Item>
+            <Menu.Item key='proving'><Link to="/proving">Proving</Link></Menu.Item>
             <Menu.Item key='sectors'>Sectors</Menu.Item>
           </Menu>
           <Divider type='vertical' style={{ height: '60%' }} />
@@ -95,6 +92,9 @@ const App: FC = () => {
           <Switch>
             <Route path='/workers'>
               <Workers></Workers>
+            </Route>
+            <Route path='/proving'>
+              <Proving></Proving>
             </Route>
             <Route path='/'>
               <Home></Home>

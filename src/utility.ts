@@ -29,3 +29,13 @@ shortShortNames.set('seal/v0/unsealread', 'URD');
 export const taskShortShortName = (task: string): string | undefined => {
     return shortShortNames.get(task);
 }
+
+export const bitCount = (array: number[]): number => {
+    let count: number = 0;
+    array.forEach((value: number) => {
+        for (; value; count++) {
+            value &= value - 1; // clear the least significant bit set
+        }
+    });
+    return count;
+}
