@@ -100,6 +100,7 @@ const App: FC = () => {
   const handleChangeMinerToken = (e: React.ChangeEvent<HTMLInputElement>) => { dispatch(updateMinerToken(e.target.value)); }
 
   // Message reducer async fetch errors
+  message.config({ top: 48 });
   useEffect(() => { if (actorInfo.status === 'failed') { message.error(actorInfo.error) } }, [actorInfo]);
   useEffect(() => { if (actorPower.status === 'failed') { message.error(actorPower.error) } }, [actorPower]);
   useEffect(() => { if (actorState.status === 'failed') { message.error(actorState.error) } }, [actorState]);
