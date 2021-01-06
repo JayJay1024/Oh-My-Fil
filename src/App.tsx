@@ -15,6 +15,7 @@ import {
 
 // Companents
 import Home from './companents/Home';
+import Jobs from './companents/Jobs';
 import Workers from './companents/Workers';
 import Proving from './companents/Proving';
 
@@ -71,7 +72,7 @@ const App: FC = () => {
           <Menu theme='light' mode='horizontal' onClick={handleClickMenu} defaultSelectedKeys={['home']}>
             <Menu.Item key='home'><Link to="/">Home</Link></Menu.Item>
             <Menu.Item key='workers'><Link to="/workers">Workers</Link></Menu.Item>
-            <Menu.Item key='jobs'>Jobs</Menu.Item>
+            <Menu.Item key='jobs'><Link to="/jobs">Jobs</Link></Menu.Item>
             <Menu.Item key='storages'>Storages</Menu.Item>
             <Menu.Item key='proving'><Link to="/proving">Proving</Link></Menu.Item>
             <Menu.Item key='sectors'>Sectors</Menu.Item>
@@ -91,10 +92,13 @@ const App: FC = () => {
         <Content className='oh-my-fil-content'>
           <Switch>
             <Route path='/workers'>
-              <Workers></Workers>
+              <Workers />
             </Route>
             <Route path='/proving'>
-              <Proving></Proving>
+              <Proving />
+            </Route>
+            <Route path='/jobs'>
+              <Jobs />
             </Route>
             <Route path='/'>
               <Home></Home>

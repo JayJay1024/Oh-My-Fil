@@ -215,19 +215,24 @@ const Home: FC = () => {
         </div>
       </Card>
 
-      <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerJobs(connectInfo))}>Tasks Count</Button>}
-        extra={workerJobs.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
-        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+      <Spin
+        size='large' delay={200}
+        spinning={workerJobs.status === 'loading' ? true : false}
       >
-        {Object.keys(taskCount).map((key: string) => {
-          return (
-            <div className='oh-my-fil-home-card-item' key={key}>
-              <div>{key}:</div>
-              <div>{taskCount[key]}</div>
-            </div>
-          )
-        })}
-      </Card>
+        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerJobs(connectInfo))}>Tasks Count</Button>}
+          extra={<Link to='/jobs'><MoreOutlined /></Link>}
+          hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+        >
+          {Object.keys(taskCount).map((key: string) => {
+            return (
+              <div className='oh-my-fil-home-card-item' key={key}>
+                <div>{key}:</div>
+                <div>{taskCount[key]}</div>
+              </div>
+            )
+          })}
+        </Card>
+      </Spin>
 
       <Spin
         size='large' delay={200}

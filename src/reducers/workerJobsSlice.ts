@@ -4,11 +4,29 @@ import { Client } from 'rpc-websockets';
 import { RootState } from '../index';
 import { ConnectInfoState } from './connectInfoSlice';
 
-interface WorkerJobsState {
-  [index: string]: any,
+export interface WorkerJobsState {
+  ID: {
+    Sector: {
+      Miner: number,
+      Number: number
+    },
+    ID: string
+  },
+  Sector: {
+    Miner: number,
+    Number: number
+  },
+  Task: string,
+  Number: number,
+  RunWait: number,
+  Start: string
+}
+
+interface WorkersJobsState {
+  [index: string]: WorkerJobsState[],
 };
 interface FetchWorkerJobsState {
-  data: WorkerJobsState,
+  data: WorkersJobsState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,
 }
@@ -2538,7 +2556,7 @@ const initialState = {
 const fetchWorkerJobs = createAsyncThunk(
   'worker/jobs',
   async (connectInfo: ConnectInfoState) => {
-    return new Promise<WorkerJobsState>((resolve, rejects) => {
+    return new Promise<WorkersJobsState>((resolve, rejects) => {
       const nodeMiner = new Client(`ws://${connectInfo.minerApi}/rpc/v0?token=${connectInfo.minerToken}`);
 
       nodeMiner.on('error', async (err) => {
@@ -2548,7 +2566,7 @@ const fetchWorkerJobs = createAsyncThunk(
 
       nodeMiner.on("open", async () => {
         try {
-          const workerJobs = await nodeMiner.call('Filecoin.WorkerJobs', []) as WorkerJobsState;
+          const workerJobs = await nodeMiner.call('Filecoin.WorkerJobs', []) as WorkersJobsState;
           resolve(workerJobs);
         } catch (err) {
           rejects(err);
