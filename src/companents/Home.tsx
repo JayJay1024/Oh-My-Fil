@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Antd
-import { Card, Divider, Button, Spin, Tooltip, Badge } from "antd";
+import { Card, Divider, Button, Spin, Tooltip, Badge, message } from "antd";
 import { ReloadOutlined, MoreOutlined, WarningOutlined, SettingOutlined } from '@ant-design/icons';
 
 import '../App.less';
@@ -45,13 +45,31 @@ const Home: FC = () => {
   const dispatch = useDispatch()
   const actorAddress = actorInfo.data.actorAddress;
 
+  const handleClickSectorsSummary = () => {
+    if (actorAddress.length === 0) {
+      message.warning('Connect firstly ~');
+      return;
+    }
+    dispatch(fetchSectorsSummary(connectInfo));
+  }
+
   const handleClickMinerPower = () => {
+    if (actorAddress.length === 0) {
+      message.warning('Connect firstly ~');
+      return;
+    }
+
     dispatch(fetchSectorCount({ connectInfo, actorAddress }));
     dispatch(fetchMinerRecoveries({ connectInfo, actorAddress }));
     dispatch(fetchActorPower({ connectInfo, actorAddress }));
   }
 
   const handleClickMinerBalance = () => {
+    if (actorAddress.length === 0) {
+      message.warning('Connect firstly ~');
+      return;
+    }
+
     const actorAddress1 = {
       owner: minerInfo.data.Owner,
       worker: minerInfo.data.Worker,
@@ -61,6 +79,22 @@ const Home: FC = () => {
 
     dispatch(fetchActorState({ connectInfo, actorAddress }));
     dispatch(fetchMinerAvailableBalance({ connectInfo, actorAddress }));
+  }
+
+  const handleClickTasksCount = () => {
+    if (actorAddress.length === 0) {
+      message.warning('Connect firstly ~');
+      return;
+    }
+    dispatch(fetchWorkerJobs(connectInfo));
+  }
+
+  const handleClickWorkerCount = () => {
+    if (actorAddress.length === 0) {
+      message.warning('Connect firstly ~');
+      return;
+    }
+    dispatch(fetchWorkerStat(connectInfo));
   }
 
   // Expected
@@ -118,7 +152,7 @@ const Home: FC = () => {
         size='large' delay={200}
         spinning={sectorsSummary.status === 'loading' ? true : false}
       >
-        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchSectorsSummary(connectInfo))}>Sectors Summary</Button>}
+        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickSectorsSummary}>Sectors Summary</Button>}
           extra={<Tooltip title='More'>
             <Link to='/sectors'><MoreOutlined /></Link>
           </Tooltip>}
@@ -211,7 +245,7 @@ const Home: FC = () => {
         size='large' delay={200}
         spinning={workerJobs.status === 'loading' ? true : false}
       >
-        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerJobs(connectInfo))}>Tasks Count</Button>}
+        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickTasksCount}>Tasks Count</Button>}
           extra={<Tooltip title='More'>
             <Link to='/jobs'><MoreOutlined /></Link>
           </Tooltip>}
@@ -233,7 +267,7 @@ const Home: FC = () => {
         spinning={workerStat.status === 'loading' ? true : false}
       >
         <Card title={<Tooltip title='这里不要频繁刷新，关联调度程序锁会导致卡很久'>
-          <Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => dispatch(fetchWorkerStat(connectInfo))}>Worker Count</Button>
+          <Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickWorkerCount}>Worker Count</Button>
           <WarningOutlined />
         </Tooltip>}
           extra={<Tooltip title='More'>
