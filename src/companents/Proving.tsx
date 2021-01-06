@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // Antd
 import { ColumnsType } from 'antd/es/table';
 import { Row, Col, Statistic } from 'antd';
-import { PageHeader, Table, Button, Spin, message } from 'antd';
+import { PageHeader, Table, Button, Spin } from 'antd';
 import { ReloadOutlined, SyncOutlined, ClockCircleOutlined } from '@ant-design/icons';
 
 // Reducers
@@ -94,10 +94,6 @@ const Proving: FC = () => {
     dispatch(fetchProvingDeadline({ connectInfo, actorAddress }));
     dispatch(fetchDeadlinesPartitions({ connectInfo, actorAddress }));
   }
-
-  useEffect(() => { if (minerDeadlines.status==='failed')      { message.error(minerDeadlines.error) } },      [minerDeadlines]);
-  useEffect(() => { if (provingDeadline.status==='failed')     { message.error(provingDeadline.error) } },     [provingDeadline]);
-  useEffect(() => { if (deadlinesPartitions.status==='failed') { message.error(deadlinesPartitions.error) } }, [deadlinesPartitions]);
 
   return (
     <div className='oh-my-fil-proving-content'>

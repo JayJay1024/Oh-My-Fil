@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Antd
 import { ReloadOutlined, SearchOutlined, WarningOutlined } from '@ant-design/icons';
-import { PageHeader, Descriptions, Badge, Typography, Select, Button, Spin, Tooltip, message } from 'antd';
+import { PageHeader, Descriptions, Badge, Typography, Select, Button, Spin, Tooltip } from 'antd';
 
 // Reducers
 import { selectConnectInfo } from '../reducers/connectInfoSlice';
@@ -17,8 +17,6 @@ const Worker: FC = () => {
   const dispatch = useDispatch();
   const workerStat = useSelector(selectWorkerStat);
   const connectInfo = useSelector(selectConnectInfo);
-
-  useEffect(() => { if (workerStat.status === 'failed') { message.error(workerStat.error) } }, [workerStat]);
 
   return (
     <div className='oh-my-fil-workers-content'>

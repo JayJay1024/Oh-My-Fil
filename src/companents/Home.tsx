@@ -1,8 +1,8 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Antd
-import { Card, Divider, Button, Spin, Tooltip, message } from "antd";
+import { Card, Divider, Button, Spin, Tooltip } from "antd";
 import { ReloadOutlined, MoreOutlined, WarningOutlined } from '@ant-design/icons';
 
 import '../App.less';
@@ -62,16 +62,6 @@ const Home: FC = () => {
     dispatch(fetchActorState({ connectInfo, actorAddress }));
     dispatch(fetchMinerAvailableBalance({ connectInfo, actorAddress }));
   }
-
-  useEffect(() => { if (minerRecoveries.status === 'failed')       { message.error(minerRecoveries.error) } },       [minerRecoveries]);
-  useEffect(() => { if (actorState.status === 'failed')            { message.error(actorState.error) } },            [actorState]);
-  useEffect(() => { if (minerAvailableBalance.status === 'failed') { message.error(minerAvailableBalance.error) } }, [minerAvailableBalance]);
-  useEffect(() => { if (minerInfo.status === 'failed')             { message.error(minerInfo.error) } },             [minerInfo]);
-  useEffect(() => { if (workerBalance.status === 'failed')         { message.error(workerBalance.error) } },         [workerBalance]);
-  useEffect(() => { if (workerJobs.status === 'failed')            { message.error(workerJobs.error) } },            [workerJobs]);
-  useEffect(() => { if (workerStat.status === 'failed')            { message.error(workerStat.error) } },            [workerStat]);
-  useEffect(() => { if (sectorCount.status === 'failed')           { message.error(sectorCount.error) } },           [sectorCount]);
-  useEffect(() => { if (actorPower.status === 'failed')            { message.error(actorPower.error) } },            [actorPower]);
 
   // Expected
   let winPerDay: number = 0;
