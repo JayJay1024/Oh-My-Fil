@@ -145,7 +145,7 @@ const App: FC = () => {
           <Menu theme='light' mode='horizontal' onClick={handleClickNode}>
             <Menu.Item key='node'>{actorAddress.length ? <><UserOutlined />{actorAddress} ({bytes(actorInfo.data.actorSectorSize)})</> : <>Connect</>}</Menu.Item>
           </Menu>
-          <Modal closable={false} visible={visibleConnectInfoModal} title='Node Info' onOk={handleOKModalConnectInfo} onCancel={() => setVisibleConnectInfoModal(false)}>
+          <Modal closable={false} visible={visibleConnectInfoModal} title='Connect Info' onOk={handleOKModalConnectInfo} onCancel={() => setVisibleConnectInfoModal(false)}>
             <Input allowClear={true} onChange={handleChangeLotusApi}   className='oh-my-fil-node-info-button' placeholder='Just click OK for dev to connect, or Cancel ~' />
             <Input allowClear={true} onChange={handleChangeMinerApi}   className='oh-my-fil-node-info-button' placeholder='Just click OK for dev to connect, or Cancel ~' />
             <Input allowClear={true} onChange={handleChangeLotusToken} className='oh-my-fil-node-info-button' placeholder='Just click OK for dev to connect, or Cancel ~' />
