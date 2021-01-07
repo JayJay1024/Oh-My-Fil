@@ -56,7 +56,7 @@ const slice = createSlice({
     });
     builder.addCase(fetchStorageLocal.rejected, (state, action) => {
       state.status = 'loading';
-      state.error = action.error.message;
+      state.error = action.error.message || 'Something Error ...';
     });
     builder.addCase(fetchStorageLocal.fulfilled, (state, action) => {
       state.status = 'succeeded';

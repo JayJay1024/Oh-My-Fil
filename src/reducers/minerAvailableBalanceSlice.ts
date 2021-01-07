@@ -57,7 +57,7 @@ const slice = createSlice({
     })
     builder.addCase(fetchMinerAvailableBalance.rejected, (state, action) => {
       state.status = 'failed';
-      state.error = action.error.message;
+      state.error = action.error.message || 'Something Error ...';
     });
     builder.addCase(fetchMinerAvailableBalance.fulfilled, (state, action) => {
       state.status = 'succeeded';

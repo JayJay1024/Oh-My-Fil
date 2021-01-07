@@ -84,7 +84,7 @@ const slice = createSlice({
     })
     builder.addCase(fetchProvingDeadline.rejected, (state, action) => {
       state.status = 'failed';
-      state.error = action.error.message;
+      state.error = action.error.message || 'Something Error ...';
     });
     builder.addCase(fetchProvingDeadline.fulfilled, (state, action) => {
       state.status = 'succeeded';

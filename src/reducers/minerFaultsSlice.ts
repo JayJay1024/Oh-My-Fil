@@ -58,7 +58,7 @@ const slice = createSlice({
     });
     builder.addCase(fetchMinerFaults.rejected, (state, action) => {
       state.status = 'failed';
-      state.error = action.error.message;
+      state.error = action.error.message || 'Something Error ...';
     });
     builder.addCase(fetchMinerFaults.fulfilled, (state, action) => {
       state.status = 'succeeded';

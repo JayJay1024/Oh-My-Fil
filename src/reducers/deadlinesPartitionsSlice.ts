@@ -104,7 +104,7 @@ const slice = createSlice({
     })
     builder.addCase(fetchDeadlinesPartitions.rejected, (state, action) => {
       state.status = 'failed';
-      state.error = action.error.message;
+      state.error = action.error.message || 'Something Error ...';
     });
     builder.addCase(fetchDeadlinesPartitions.fulfilled, (state, action) => {
       state.status = 'succeeded';

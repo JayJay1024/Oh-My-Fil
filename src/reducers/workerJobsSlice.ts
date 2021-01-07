@@ -2588,7 +2588,7 @@ const slice = createSlice({
     });
     builder.addCase(fetchWorkerJobs.rejected, (state, action) => {
       state.status = 'loading';
-      state.error = action.error.message;
+      state.error = action.error.message || 'Something Error ...';
     });
     builder.addCase(fetchWorkerJobs.fulfilled, (state, action) => {
       state.status = 'succeeded';

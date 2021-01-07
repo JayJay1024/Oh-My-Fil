@@ -84,7 +84,7 @@ const slice = createSlice({
     });
     builder.addCase(fetchStorageInfo.rejected, (state, action) => {
       state.status = 'loading';
-      state.error = action.error.message;
+      state.error = action.error.message || 'Something Error ...';
     });
     builder.addCase(fetchStorageInfo.fulfilled, (state, action) => {
       state.status = 'succeeded';

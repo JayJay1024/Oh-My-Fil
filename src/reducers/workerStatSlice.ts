@@ -4754,7 +4754,7 @@ const slice = createSlice({
     });
     builder.addCase(fetchWorkerStat.rejected, (state, action) => {
       state.status = 'loading';
-      state.error = action.error.message;
+      state.error = action.error.message || 'Something Error ...';
     });
     builder.addCase(fetchWorkerStat.fulfilled, (state, action) => {
       state.status = 'succeeded';

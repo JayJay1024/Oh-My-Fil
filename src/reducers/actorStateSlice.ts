@@ -91,7 +91,7 @@ const slice = createSlice({
     })
     builder.addCase(fetchActorState.rejected, (state, action) => {
       state.status = 'failed';
-      state.error = action.error.message;
+      state.error = action.error.message || 'Something Error ...';
     });
     builder.addCase(fetchActorState.fulfilled, (state, action) => {
       state.status = 'succeeded';
