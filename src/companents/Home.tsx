@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Antd
-import { Card, Divider, Button, Spin, Tooltip, Badge, message } from "antd";
-import { ReloadOutlined, MoreOutlined, WarningOutlined, SettingOutlined } from '@ant-design/icons';
+import { Card, Divider, Button, Spin, Tooltip, Switch, Input, message } from "antd";
+import { ReloadOutlined, MoreOutlined, WarningOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
 import '../App.less';
 import bytes from 'bytes';
@@ -23,6 +23,13 @@ import { selectMinerInfo } from '../reducers/minerInfoSlice';
 import { fetchActorPower, selectActorPower } from '../reducers/actorPowerSlice';
 import { fetchWorkerJobs, selectWorkerJobs } from '../reducers/workerJobsSlice';
 import { fetchWorkerStat, selectWorkerStat } from '../reducers/workerStatSlice';
+import {
+  fetchAutoPledgeInfo,
+  enableAutoPledge,
+  disableAutoPledge,
+  settimeAutoPledge,
+  selectAutoPledgeInfo
+} from '../reducers/autoPledgeSlice';
 
 const nano2fil = (nanoString: string): string => {
   return (parseInt(nanoString.slice(0, -9)) / (Math.pow(10, 9))).toFixed(3)
@@ -41,9 +48,11 @@ const Home: FC = () => {
   const actorPower = useSelector(selectActorPower);
   const workerJobs = useSelector(selectWorkerJobs);
   const workerStat = useSelector(selectWorkerStat);
+  const autoPledgeInfo = useSelector(selectAutoPledgeInfo);
 
   const dispatch = useDispatch()
   const actorAddress = actorInfo.data.actorAddress;
+  const [autopledgeTime, setAutoPledgeTime] = useState<number>(autoPledgeInfo.data.time);
 
   const handleClickSectorsSummary = () => {
     if (actorAddress.length === 0) {
@@ -96,6 +105,43 @@ const Home: FC = () => {
     }
     dispatch(fetchWorkerStat(connectInfo));
   }
+
+  const handleClickAutoPledge = () => {
+    if (actorAddress.length === 0) {
+      message.warning('Connect Firstly ~');
+      return;
+    }
+    dispatch(fetchAutoPledgeInfo(connectInfo));
+  }
+
+  const handleChangeAutoPlageStatus = (cheched: boolean) => {
+    if (actorAddress.length === 0) {
+      message.warning('Connect Firstly ~');
+      return;
+    }
+    if (cheched) {
+      dispatch(enableAutoPledge(connectInfo));
+    } else {
+      dispatch(disableAutoPledge(connectInfo));
+    }
+  }
+
+  const handleChanheAutoPledgeSettime = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAutoPledgeTime(Number(e.target.value));
+  }
+
+  const handlePressEnterAutoPledgeSettime = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (actorAddress.length === 0) {
+      message.warning('Connect Firstly ~');
+      return;
+    }
+    dispatch(settimeAutoPledge({ connectInfo, time: autopledgeTime }));
+  }
+
+  useEffect(() => {
+    setAutoPledgeTime(autoPledgeInfo.data.time);
+  }, [autoPledgeInfo]);
 
   // Expected
   let winPerDay: number = 0;
@@ -288,23 +334,26 @@ const Home: FC = () => {
 
       <Spin
         size='large' delay={200}
-        spinning={false}
+        spinning={autoPledgeInfo.status==='loading'?true:false}
       >
-        <Badge.Ribbon text='Fake data, todo'>
-          <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={() => {}}>Auto Pledge</Button>}
-            extra={<SettingOutlined />}
-            hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
-          >
-            <div className='oh-my-fil-home-card-item' key='status'>
-              <div>Status:</div>
-              <div>Enable</div>
+        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickAutoPledge}>Auto Pledge</Button>}
+          hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+        >
+          <div className='oh-my-fil-home-card-item' key='status'>
+            <div>Enable:</div>
+            <div><Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} checked={autoPledgeInfo.data.enable} onChange={handleChangeAutoPlageStatus} /></div>
+          </div>
+          <div className='oh-my-fil-home-card-item' key='time'>
+            <div>Time:</div>
+            <div>
+              <Input size='small' type='number' value={autopledgeTime}
+                onChange={handleChanheAutoPledgeSettime}
+                onPressEnter={handlePressEnterAutoPledgeSettime}
+                style={{ textAlign: 'right', width: '80px', backgroundColor: 'transparent', borderRadius: '10px' }}
+              /> Seconds
             </div>
-            <div className='oh-my-fil-home-card-item' key='time'>
-              <div>Time:</div>
-              <div>100 seconds</div>
-            </div>
-          </Card>
-        </Badge.Ribbon>
+          </div>
+        </Card>
       </Spin>
     </div>
   );

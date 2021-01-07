@@ -49,6 +49,7 @@ import { selectStorageStat } from './reducers/storageStatSlice';
 import { selectWorkerBalance } from './reducers/workerBalanceSlice';
 import { selectWorkerJobs } from './reducers/workerJobsSlice';
 import { selectWorkerStat } from './reducers/workerStatSlice';
+import { selectAutoPledgeInfo } from './reducers/autoPledgeSlice';
 
 const { Header, Content, Footer } = Layout;
 
@@ -75,6 +76,7 @@ const App: FC = () => {
   const workerBalance = useSelector(selectWorkerBalance);
   const workerJobs = useSelector(selectWorkerJobs);
   const workerStat = useSelector(selectWorkerStat);
+  const autoPledgeInfo = useSelector(selectAutoPledgeInfo);
 
   const dispatch = useDispatch()
   const actorAddress = actorInfo.data.actorAddress;
@@ -121,6 +123,7 @@ const App: FC = () => {
   useEffect(() => { if (workerBalance.status === 'failed') { message.error(workerBalance.error) } }, [workerBalance]);
   useEffect(() => { if (workerJobs.status === 'failed') { message.error(workerJobs.error) } }, [workerJobs]);
   useEffect(() => { if (workerStat.status === 'failed') { message.error(workerStat.error) } }, [workerStat]);
+  useEffect(() => { if (autoPledgeInfo.status === 'failed') { message.error(autoPledgeInfo.error) } }, [autoPledgeInfo]);
 
   useEffect(() => {
     if (actorAddress.length) {
