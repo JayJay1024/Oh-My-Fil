@@ -47,7 +47,7 @@ const Home: FC = () => {
 
   const handleClickSectorsSummary = () => {
     if (actorAddress.length === 0) {
-      message.warning('Connect firstly ~');
+      message.warning('Connect Firstly ~');
       return;
     }
     dispatch(fetchSectorsSummary(connectInfo));
@@ -55,7 +55,7 @@ const Home: FC = () => {
 
   const handleClickMinerPower = () => {
     if (actorAddress.length === 0) {
-      message.warning('Connect firstly ~');
+      message.warning('Connect Firstly ~');
       return;
     }
 
@@ -66,7 +66,7 @@ const Home: FC = () => {
 
   const handleClickMinerBalance = () => {
     if (actorAddress.length === 0) {
-      message.warning('Connect firstly ~');
+      message.warning('Connect Firstly ~');
       return;
     }
 
@@ -83,7 +83,7 @@ const Home: FC = () => {
 
   const handleClickTasksCount = () => {
     if (actorAddress.length === 0) {
-      message.warning('Connect firstly ~');
+      message.warning('Connect Firstly ~');
       return;
     }
     dispatch(fetchWorkerJobs(connectInfo));
@@ -91,7 +91,7 @@ const Home: FC = () => {
 
   const handleClickWorkerCount = () => {
     if (actorAddress.length === 0) {
-      message.warning('Connect firstly ~');
+      message.warning('Connect Firstly ~');
       return;
     }
     dispatch(fetchWorkerStat(connectInfo));
