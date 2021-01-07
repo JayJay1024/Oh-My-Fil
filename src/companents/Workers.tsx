@@ -11,6 +11,7 @@ import { fetchWorkerStat, selectWorkerStat } from '../reducers/workerStatSlice';
 
 import '../App.less';
 import bytes from 'bytes';
+import { Link } from 'react-router-dom';
 import { taskShortName, taskShortShortName } from '../utility';
 
 const Worker: FC = () => {
@@ -92,7 +93,7 @@ const Worker: FC = () => {
                   {workerStat.data[key].Info.StoragePaths.map((value: any) => {
                     return (
                       <>
-                        <span><a href='/storages'>{value.ID}</a>: {value.LocalPath}</span><br />
+                        <span><Link to='/storages'>{value.ID}</Link>: {value.LocalPath}</span><br />
                       </>
                     )
                   })}
