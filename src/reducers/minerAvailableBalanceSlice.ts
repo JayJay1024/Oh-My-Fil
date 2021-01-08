@@ -23,7 +23,7 @@ interface fetchParam {
 }
 
 const fetchMinerAvailableBalance = createAsyncThunk(
-  'miner/faults',
+  'miner/available/balance',
   async (params: fetchParam) => {
     return new Promise<MinerAvailableBalanceState>((resolve, rejects) => {
       const nodeMiner = new Client(`ws://${params.connectInfo.lotusApi}/rpc/v0?token=${params.connectInfo.lotusToken}`);
