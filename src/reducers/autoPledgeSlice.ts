@@ -111,6 +111,38 @@ const disableAutoPledge = createAsyncThunk(
   }
 );
 
+const pledgeOneSector = createAsyncThunk(
+  'autopledge/pledge',
+  async (connectInfo: ConnectInfoState) => {
+    return new Promise<AutoPledgeInfoState>((resolve, rejects) => {
+      const nodeMiner = new Client(`ws://${connectInfo.minerApi}/rpc/v0?token=${connectInfo.minerToken}`);
+
+      nodeMiner.on('error', async (err) => {
+        rejects(err);
+      });
+      nodeMiner.on('close', () => {});
+
+      nodeMiner.on("open", async () => {
+        try {
+          // https://github.com/elpheria/rpc-websockets/issues/91
+          try {
+            await nodeMiner.call('Filecoin.PledgeSector', []);
+          } catch (err) {
+            console.error(err);
+          }
+          const enable = await nodeMiner.call('Filecoin.HKC2AutoPledgeStatus', []) as boolean;
+          const time = await nodeMiner.call('Filecoin.HKC2AutoPledgeGetTime', []) as number;
+          resolve({ enable, time } as AutoPledgeInfoState);
+        } catch (err) {
+          rejects(err)
+        } finally {
+          nodeMiner.close();
+        }
+      });
+    });
+  }
+);
+
 interface settimeParam {
   connectInfo: ConnectInfoState
   time: number,
@@ -199,6 +231,18 @@ const slice = createSlice({
       state.status = 'succeeded';
       state.data.time = action.payload.time;
     });
+
+    builder.addCase(pledgeOneSector.pending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addCase(pledgeOneSector.rejected, (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message || 'Something Error ...';
+    });
+    builder.addCase(pledgeOneSector.fulfilled, (state, action) => {
+      state.status = 'succeeded';
+      state.data = action.payload;
+    });
   },
 });
 
@@ -206,7 +250,8 @@ export {
   fetchAutoPledgeInfo,
   enableAutoPledge,
   disableAutoPledge,
-  settimeAutoPledge
+  settimeAutoPledge,
+  pledgeOneSector
 };
 export const selectAutoPledgeInfo = (state: RootState) => state.autoPledge;
 

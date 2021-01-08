@@ -2681,7 +2681,7 @@ const initialState = {
     },
     '8d70ebaf-29e7-4dc9-88de-5ee1cf8301e6': {
       Info: {
-        Hostname: 'HI05-MIN-A001',
+        Hostname: 'HI05-HEY-A001',
         Urls: [
           'http://0.0.0.0:30731/remote'
         ],
@@ -2704,7 +2704,7 @@ const initialState = {
           'seal/v0/precommit/1': -1,
           'seal/v0/precommit/2': -1
         },
-        Device: 'HI05-MIN-A001',
+        Device: 'HI05-HEY-A001',
         Session: '8d70ebaf-29e7-4dc9-88de-5ee1cf8301e6',
         TaskTypes: {
           'seal/v0/commit/1': {},
@@ -2716,15 +2716,15 @@ const initialState = {
         StoragePaths: [
           {
             ID: '9921d275-fa30-4e02-81b4-c053349e0bb4',
-            LocalPath: '/data-gfs-1/ceph-bak/72-miner'
+            LocalPath: '/data-store/test1'
           },
           {
             ID: 'cbe18239-bda4-42c2-8ba9-3ea72e820b52',
-            LocalPath: '/data-gfs-1/sectors-storage'
+            LocalPath: '/data-store/test2'
           },
           {
             ID: 'd105f013-a2d9-47c4-851f-d6af234810a8',
-            LocalPath: '/data-gfs-2/sectors-storage'
+            LocalPath: '/data-store/test3'
           }
         ]
       },

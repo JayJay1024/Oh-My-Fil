@@ -28,7 +28,8 @@ import {
   enableAutoPledge,
   disableAutoPledge,
   settimeAutoPledge,
-  selectAutoPledgeInfo
+  selectAutoPledgeInfo,
+  pledgeOneSector,
 } from '../reducers/autoPledgeSlice';
 
 const nano2fil = (nanoString: string): string => {
@@ -90,6 +91,14 @@ const Home: FC = () => {
     dispatch(fetchMinerAvailableBalance({ connectInfo, actorAddress }));
   }
 
+  const handleClickPledgeOneSector = () => {
+    if (actorAddress.length === 0) {
+      message.warning('Connect Firstly ~');
+      return;
+    }
+    dispatch(pledgeOneSector(connectInfo));
+  }
+
   const handleClickTasksCount = () => {
     if (actorAddress.length === 0) {
       message.warning('Connect Firstly ~');
@@ -141,6 +150,12 @@ const Home: FC = () => {
 
   useEffect(() => {
     setAutoPledgeTime(autoPledgeInfo.data.time);
+  }, [autoPledgeInfo]);
+
+  useEffect(() => {
+    if (autoPledgeInfo.status === 'succeeded') {
+      message.success('Seccuss ~');
+    }
   }, [autoPledgeInfo]);
 
   // Expected
@@ -353,6 +368,7 @@ const Home: FC = () => {
               /> Seconds
             </div>
           </div>
+          <Button type='default' shape='round' size='small' style={{ width: '100%', marginTop: '10px' }} onClick={handleClickPledgeOneSector} >Pledge One Sector</Button>
         </Card>
       </Spin>
     </div>
