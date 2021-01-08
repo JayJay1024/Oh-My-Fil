@@ -53,6 +53,7 @@ const Home: FC = () => {
 
   const dispatch = useDispatch()
   const actorAddress = actorInfo.data.actorAddress;
+  const [havePledgeUpdate, setHavePledgeUpdate] = useState<boolean>(false);
   const [autopledgeTime, setAutoPledgeTime] = useState<number>(autoPledgeInfo.data.time);
 
   const handleClickSectorsSummary = () => {
@@ -96,6 +97,7 @@ const Home: FC = () => {
       message.warning('Connect Firstly ~');
       return;
     }
+    setHavePledgeUpdate(true);
     dispatch(pledgeOneSector(connectInfo));
   }
 
@@ -128,6 +130,7 @@ const Home: FC = () => {
       message.warning('Connect Firstly ~');
       return;
     }
+    setHavePledgeUpdate(true);
     if (cheched) {
       dispatch(enableAutoPledge(connectInfo));
     } else {
@@ -145,6 +148,7 @@ const Home: FC = () => {
       message.warning('Connect Firstly ~');
       return;
     }
+    setHavePledgeUpdate(true);
     dispatch(settimeAutoPledge({ connectInfo, time: autopledgeTime }));
   }
 
@@ -153,10 +157,11 @@ const Home: FC = () => {
   }, [autoPledgeInfo]);
 
   useEffect(() => {
-    if (autoPledgeInfo.status === 'succeeded') {
+    if (havePledgeUpdate && autoPledgeInfo.status === 'succeeded') {
+      setHavePledgeUpdate(false);
       message.success('Seccuss ~');
     }
-  }, [autoPledgeInfo]);
+  }, [autoPledgeInfo, havePledgeUpdate]);
 
   // Expected
   let winPerDay: number = 0;
