@@ -13,13 +13,8 @@ import { selectConnectInfo } from '../reducers/connectInfoSlice';
 import { fetchWorkerJobs, selectWorkerJobs, WorkerJobsState } from '../reducers/workerJobsSlice';
 
 import '../App.less';
+import prettyMs from 'pretty-ms';
 import { taskShortShortName } from '../utility';
-import dayjs from 'dayjs';
-import duration from 'dayjs/plugin/duration';
-import relativeTime from 'dayjs/plugin/relativeTime';
-
-dayjs.extend(duration);
-dayjs.extend(relativeTime);
 
 const Proving: FC = () => {
   const dispatch = useDispatch();
@@ -91,7 +86,7 @@ const Proving: FC = () => {
       hostname: hostname,
       task: task,
       state: 'running',
-      time: dayjs.duration(dayjs(l.job.Start).diff(dayjs())).humanize(true),
+      time: prettyMs((new Date()).getTime() - (new Date(l.job.Start)).getTime()),
     });
   });
 
@@ -136,7 +131,7 @@ const Proving: FC = () => {
     title: 'Time',
     dataIndex: 'time',
     key: 'time',
-    align: 'center',
+    align: 'left',
   }];
 
   return (
