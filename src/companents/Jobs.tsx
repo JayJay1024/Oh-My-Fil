@@ -24,6 +24,7 @@ const Proving: FC = () => {
 
   interface JobsTableDataState {
     key: number,
+    idx: number,
     sector: number,
     worker: string,
     hostname: string,
@@ -67,7 +68,7 @@ const Proving: FC = () => {
   const workerFilters = new Set<string>();
 
   const jobsTableData: JobsTableDataState[] = [];
-  lines.forEach(l => {
+  lines.forEach((l, idx) => {
     let hostname = 'unknow';
     if (workerStat.data[l.wid]) {
       hostname = workerStat.data[l.wid].Info.Hostname
@@ -81,6 +82,7 @@ const Proving: FC = () => {
 
     jobsTableData.push({
       key: l.job.Sector.Number,
+      idx: lines.length - idx,
       sector: l.job.Sector.Number,
       worker: worker,
       hostname: hostname,
@@ -91,6 +93,11 @@ const Proving: FC = () => {
   });
 
   const jobsTableColumns: ColumnsType<JobsTableDataState> = [{
+    title: 'Index',
+    dataIndex: 'idx',
+    key: 'idx',
+    align: 'left',
+  }, {
     title: 'Sector',
     dataIndex: 'sector',
     key: 'sector',
