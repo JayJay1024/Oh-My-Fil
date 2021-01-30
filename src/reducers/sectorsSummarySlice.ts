@@ -8,7 +8,7 @@ interface SectorsSummaryState {
   [index: string]: number
 };
 
-interface FetchSectorsSummaryState {
+export interface FetchSectorsSummaryState {
   data: SectorsSummaryState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

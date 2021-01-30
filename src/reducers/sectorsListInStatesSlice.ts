@@ -5,7 +5,7 @@ import { RootState } from '../index';
 import { ConnectInfoState } from './connectInfoSlice';
 
 type sectorsListInStatesState = Array<number>;
-interface FetchsectorsListInStatesState {
+export interface FetchsectorsListInStatesState {
   data: sectorsListInStatesState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

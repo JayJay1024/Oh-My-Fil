@@ -11,7 +11,7 @@ interface ActorPowerState {
   HasMinPower: boolean,
 };
 
-interface FetchActorPowerState {
+export interface FetchActorPowerState {
   data: ActorPowerState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

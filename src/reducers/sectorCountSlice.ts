@@ -10,7 +10,7 @@ interface SectorCountState {
   Faulty: number,
 }
 
-interface FetchSectorCountState {
+export interface FetchSectorCountState {
   data: SectorCountState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

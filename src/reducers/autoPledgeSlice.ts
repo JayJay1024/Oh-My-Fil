@@ -8,7 +8,7 @@ interface AutoPledgeInfoState {
   enable: boolean,
   time: number
 }
-interface FetchAutoPledgeInfoState {
+export interface FetchAutoPledgeInfoState {
   data: AutoPledgeInfoState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

@@ -10,7 +10,7 @@ export interface ConnectInfoState {
   minerToken: string,
 }
 
-const initialState = {
+export const initialState = {
   lotusApi:   devConfig.lotusApi,
   minerApi:   devConfig.minerApi,
   lotusToken: devConfig.lotusToken,

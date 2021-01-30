@@ -5,7 +5,7 @@ import { RootState } from '../index';
 import { ConnectInfoState } from './connectInfoSlice';
 
 type WorkerStatState = any;
-interface FetchWorkerStatState {
+export interface FetchWorkerStatState {
   data: WorkerStatState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

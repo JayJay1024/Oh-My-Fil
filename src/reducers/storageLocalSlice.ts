@@ -5,7 +5,7 @@ import { RootState } from '../index';
 import { ConnectInfoState } from './connectInfoSlice';
 
 type StorageLocalState = object;
-interface FetchStorageLocalState {
+export interface FetchStorageLocalState {
   data: StorageLocalState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

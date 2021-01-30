@@ -5,7 +5,7 @@ import { RootState } from '../index';
 import { ConnectInfoState } from './connectInfoSlice';
 
 type ActorStateState = any;
-interface FetchActorStateState {
+export interface FetchActorStateState {
   data: ActorStateState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

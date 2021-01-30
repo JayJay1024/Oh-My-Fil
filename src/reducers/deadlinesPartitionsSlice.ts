@@ -14,7 +14,7 @@ type MinerPartitionsState = {
 
 type DeadlinesPartitionsState = MinerPartitionsState[]
 
-interface FetchDeadlinesPartitionsState {
+export interface FetchDeadlinesPartitionsState {
   data: DeadlinesPartitionsState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

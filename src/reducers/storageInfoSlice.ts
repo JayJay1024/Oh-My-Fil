@@ -15,7 +15,7 @@ interface StorageInfoState {
 interface StorageInfoWithIDState {
   [index: string]: StorageInfoState
 }
-interface FetchStorageInfoState {
+export interface FetchStorageInfoState {
   data: StorageInfoWithIDState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

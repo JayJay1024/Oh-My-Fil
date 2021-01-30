@@ -7,7 +7,7 @@ import { ConnectInfoState } from './connectInfoSlice';
 interface StorageListState {
   [index: string]: any
 }
-interface FetchStorageListState {
+export interface FetchStorageListState {
   data: StorageListState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

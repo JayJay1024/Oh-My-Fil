@@ -25,7 +25,7 @@ export interface WorkerJobsState {
 interface WorkersJobsState {
   [index: string]: WorkerJobsState[],
 };
-interface FetchWorkerJobsState {
+export interface FetchWorkerJobsState {
   data: WorkersJobsState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

@@ -6,7 +6,7 @@ import { ConnectInfoState } from './connectInfoSlice';
 
 type MinerFaultsState = Array<number>;
 
-interface FetchMinerFaultsState {
+export interface FetchMinerFaultsState {
   data: MinerFaultsState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

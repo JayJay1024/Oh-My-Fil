@@ -10,7 +10,7 @@ interface WorkerBalanceState {
   worker: WalletBalanceState,
   control: WalletBalanceState
 }
-interface FetchWorkerBalanceState {
+export interface FetchWorkerBalanceState {
   data: WorkerBalanceState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

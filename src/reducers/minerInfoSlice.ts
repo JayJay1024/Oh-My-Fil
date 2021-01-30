@@ -9,7 +9,7 @@ interface MinerInfoState {
   Worker: string,
   ControlAddresses: string[],
 }
-interface FetchMinerInfoState {
+export interface FetchMinerInfoState {
   data: MinerInfoState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

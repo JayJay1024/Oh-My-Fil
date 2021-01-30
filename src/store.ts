@@ -1,5 +1,6 @@
-// miner api
 import { configureStore } from '@reduxjs/toolkit';
+
+// miner api
 import actorInfoReducer from './reducers/actorInfoSlice';
 import connectInfoReducer from './reducers/connectInfoSlice';
 import sectorsSummaryReducer from './reducers/sectorsSummarySlice';

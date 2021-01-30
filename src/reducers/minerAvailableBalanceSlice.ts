@@ -5,7 +5,7 @@ import { RootState } from '../index';
 import { ConnectInfoState } from './connectInfoSlice';
 
 type MinerAvailableBalanceState = string;
-interface FetchMinerAvailableBalanceState {
+export interface FetchMinerAvailableBalanceState {
   data: MinerAvailableBalanceState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

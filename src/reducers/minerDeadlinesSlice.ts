@@ -10,7 +10,7 @@ interface PostSubmissionsState {
 
 type MinerDeadlinesState = PostSubmissionsState[];
 
-interface FetchMinerDeadlinesState {
+export interface FetchMinerDeadlinesState {
   data: MinerDeadlinesState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

@@ -10,7 +10,7 @@ interface ActorInfoState {
   actorAddressConfig: null,
 }
 
-interface FetchActorInfoState {
+export interface FetchActorInfoState {
   data: ActorInfoState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,

@@ -19,7 +19,7 @@ interface ProvingDeadlineState {
   FaultDeclarationCutoff: number
 }
 
-interface FetchProvingDeadlineState {
+export interface FetchProvingDeadlineState {
   data: ProvingDeadlineState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null | undefined,
