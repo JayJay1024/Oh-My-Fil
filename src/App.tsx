@@ -153,10 +153,10 @@ const App: FC = () => {
             <Menu.Item key='node'>{actorAddress.length ? <><UserOutlined />{actorAddress} ({bytes(actorInfo.data.actorSectorSize)})</> : <>Connect</>}</Menu.Item>
           </Menu>
           <Modal closable={false} visible={visibleConnectInfoModal} title='Connect Info' onOk={handleOKModalConnectInfo} onCancel={() => setVisibleConnectInfoModal(false)}>
-            <Input allowClear={true} onChange={handleChangeLotusApi}   className='oh-my-fil-node-info-button' placeholder='Just click OK for dev to connect, or Cancel ~' />
-            <Input allowClear={true} onChange={handleChangeMinerApi}   className='oh-my-fil-node-info-button' placeholder='Just click OK for dev to connect, or Cancel ~' />
-            <Input allowClear={true} onChange={handleChangeLotusToken} className='oh-my-fil-node-info-button' placeholder='Just click OK for dev to connect, or Cancel ~' />
-            <Input allowClear={true} onChange={handleChangeMinerToken} className='oh-my-fil-node-info-button' placeholder='Just click OK for dev to connect, or Cancel ~' />
+            <Input allowClear={true} onChange={handleChangeLotusApi}   className='oh-my-fil-node-info-button' placeholder='127.0.0.1:1234' />
+            <Input allowClear={true} onChange={handleChangeMinerApi}   className='oh-my-fil-node-info-button' placeholder='127.0.0.1:2345' />
+            <Input allowClear={true} onChange={handleChangeLotusToken} className='oh-my-fil-node-info-button' placeholder='lotus token' />
+            <Input allowClear={true} onChange={handleChangeMinerToken} className='oh-my-fil-node-info-button' placeholder='miner token' />
           </Modal>
         </Header>
         <Content className='oh-my-fil-content'>

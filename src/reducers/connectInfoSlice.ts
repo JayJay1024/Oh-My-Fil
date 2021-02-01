@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../index';
 
-import devConfig from '../dev.config';
-
 export interface ConnectInfoState {
   lotusApi:   string,
   minerApi:   string,
@@ -11,10 +9,10 @@ export interface ConnectInfoState {
 }
 
 export const initialState = {
-  lotusApi:   devConfig.lotusApi,
-  minerApi:   devConfig.minerApi,
-  lotusToken: devConfig.lotusToken,
-  minerToken: devConfig.minerToken,
+  lotusApi:   '',
+  minerApi:   '',
+  lotusToken: '',
+  minerToken: '',
 } as ConnectInfoState;
 
 const slice = createSlice({
