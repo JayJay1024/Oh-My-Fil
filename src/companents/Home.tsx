@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Antd
@@ -6,9 +6,11 @@ import { Card, Divider, Button, Spin, Tooltip, Switch, Input, message } from "an
 import { ReloadOutlined, MoreOutlined, WarningOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
 import '../App.less';
+import DnDCard from './DnDCard';
 import bytes from 'bytes';
 import { taskShortName } from '../utility';
 import { Link } from 'react-router-dom';
+import update from 'immutability-helper';
 
 // Reducers
 import { selectConnectInfo } from '../reducers/connectInfoSlice';
@@ -31,6 +33,11 @@ import {
   selectAutoPledgeInfo,
   pledgeOneSector,
 } from '../reducers/autoPledgeSlice';
+
+export interface CardItem {
+  id: number
+  el: JSX.Element
+}
 
 const nano2fil = (nanoString: string): string => {
   return (parseInt(nanoString.slice(0, -9)) / (Math.pow(10, 9))).toFixed(3)
@@ -212,170 +219,207 @@ const Home: FC = () => {
   }
   workerCount['Total'] = totalWorker;
 
+  const [cards, setCards] = useState<CardItem[]>([{
+    id: 1,
+    el: (<Spin
+      size='large' delay={200}
+      spinning={sectorsSummary.status === 'loading' ? true : false}
+    >
+      <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickSectorsSummary}>Sectors Summary</Button>}
+        extra={<Tooltip title='More'>
+          <Link to='/sectors'><MoreOutlined /></Link>
+        </Tooltip>}
+        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+      >
+        {Object.keys(sectorsSummary.data).map((key: string) => {
+          return (
+            <div className='oh-my-fil-home-card-item' key={key}>
+              <div>{key}:</div>
+              <div>{sectorsSummary.data[key]}</div>
+            </div>
+          )
+        })}
+      </Card>
+    </Spin>)
+  }, {
+    id: 2,
+    el: (<Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerPower}>Miner Power</Button>}
+      extra={sectorCount.status === 'loading' || minerRecoveries.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
+      hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+    >
+      <Divider plain style={{ margin: '0px' }}>Power:</Divider>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Growth:</div>
+        <div>{bytes((sectorCount.data.Live - sectorCount.data.Active) * actorInfo.data.actorSectorSize)}</div>
+      </div>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Committed:</div>
+        <div>{bytes(sectorCount.data.Live * actorInfo.data.actorSectorSize)}</div>
+      </div>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Proving:</div>
+        <div>{bytes(sectorCount.data.Active * actorInfo.data.actorSectorSize)}</div>
+      </div>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Faulty:</div>
+        <div>{bytes(sectorCount.data.Faulty * actorInfo.data.actorSectorSize)}</div>
+      </div>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Recoveries:</div>
+        <div>{bytes(minerRecoveries.data[0] * actorInfo.data.actorSectorSize)}</div>
+      </div>
+      <Divider plain style={{ margin: '0px' }}>Expected:</Divider>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Win Rate:</div>
+        <div>{winPerDay.toFixed(4)}/day</div>
+      </div>
+    </Card>)
+  }, {
+    id: 3,
+    el: (<Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerBalance}>Miner Balance</Button>}
+      extra={actorState.status === 'loading' || minerAvailableBalance.status === 'loading' || workerBalance.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
+      hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+    >
+      <Divider plain style={{ margin: '0px' }}>Miner Balance:</Divider>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Total:</div>
+        <div>{nano2fil(actorState.data.Balance)} FIL</div>
+      </div>
+      <div className='oh-my-fil-home-card-item'>
+        <div>PreCommit:</div>
+        <div>{nano2fil(actorState.data.State.PreCommitDeposits)} FIL</div>
+      </div>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Pledge:</div>
+        <div>{nano2fil(actorState.data.State.InitialPledge)} FIL</div>
+      </div>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Vesting:</div>
+        <div>{nano2fil(actorState.data.State.LockedFunds)} FIL</div>
+      </div>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Available:</div>
+        <div>{nano2fil(minerAvailableBalance.data)} FIL</div>
+      </div>
+      <Divider plain style={{ margin: '0px' }}>Worker Balance:</Divider>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Owner:</div>
+        <div>{nano2fil(workerBalance.data.owner)} FIL</div>
+      </div>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Worker:</div>
+        <div>{nano2fil(workerBalance.data.worker)} FIL</div>
+      </div>
+      <div className='oh-my-fil-home-card-item'>
+        <div>Control:</div>
+        <div>{nano2fil(workerBalance.data.control)} FIL</div>
+      </div>
+    </Card>)
+  }, {
+    id: 4,
+    el: (<Spin
+      size='large' delay={200}
+      spinning={workerJobs.status === 'loading' ? true : false}
+    >
+      <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickTasksCount}>Tasks Count</Button>}
+        extra={<Tooltip title='More'>
+          <Link to='/jobs'><MoreOutlined /></Link>
+        </Tooltip>}
+        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+      >
+        {Object.keys(taskCount).map((key: string) => {
+          return (
+            <div className='oh-my-fil-home-card-item' key={key}>
+              <div>{key}:</div>
+              <div>{taskCount[key]}</div>
+            </div>
+          )
+        })}
+      </Card>
+    </Spin>)
+  }, {
+    id: 5,
+    el: (<Spin
+      size='large' delay={200}
+      spinning={workerStat.status === 'loading' ? true : false}
+    >
+      <Card title={<Tooltip title='这里不要频繁刷新，关联调度程序锁会导致卡很久'>
+        <Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickWorkerCount}>Worker Count</Button>
+        <WarningOutlined />
+      </Tooltip>}
+        extra={<Tooltip title='More'>
+          <Link to='/workers'><MoreOutlined /></Link>
+        </Tooltip>}
+        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+      >
+        {Object.keys(workerCount).map((key: string) => {
+          return (
+            <div className='oh-my-fil-home-card-item' key={key}>
+              <div>{key}:</div>
+              <div>{workerCount[key]}</div>
+            </div>
+          )
+        })}
+      </Card>
+    </Spin>)
+  }, {
+    id: 6,
+    el: (<Spin
+      size='large' delay={200}
+      spinning={autoPledgeInfo.status === 'loading' ? true : false}
+    >
+      <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickAutoPledge}>Auto Pledge</Button>}
+        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
+      >
+        <div className='oh-my-fil-home-card-item' key='status'>
+          <div>Enable:</div>
+          <div><Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} checked={autoPledgeInfo.data.enable} onChange={handleChangeAutoPlageStatus} /></div>
+        </div>
+        <div className='oh-my-fil-home-card-item' key='time'>
+          <div>Time:</div>
+          <div>
+            <Input size='small' type='number' value={autopledgeTime}
+              onChange={handleChanheAutoPledgeSettime}
+              onPressEnter={handlePressEnterAutoPledgeSettime}
+              style={{ textAlign: 'right', width: '80px', backgroundColor: 'transparent', borderRadius: '10px' }}
+            /> Seconds
+          </div>
+        </div>
+        <Button type='default' shape='round' size='small' style={{ width: '100%', marginTop: '10px' }} onClick={handleClickPledgeOneSector} >Pledge One Sector</Button>
+      </Card>
+    </Spin>)
+  }]);
+
+  const moveCard = useCallback(
+    (dragIndex: number, hoverIndex: number) => {
+      const dragCard = cards[dragIndex]
+      setCards(
+        update(cards, {
+          $splice: [
+            [dragIndex, 1],
+            [hoverIndex, 0, dragCard],
+          ],
+        }),
+      )
+    },
+    [cards],
+  );
+
+  const renderCard = (card: { id: number; el: JSX.Element }, index: number) => {
+    return (
+      <DnDCard
+        key={card.id}
+        index={index}
+        id={card.id}
+        child={card.el}
+        moveCard={moveCard}
+      />
+    )
+  }
+
   return (
     <div className='oh-my-fil-home-content'>
-      <Spin
-        size='large' delay={200}
-        spinning={sectorsSummary.status === 'loading' ? true : false}
-      >
-        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickSectorsSummary}>Sectors Summary</Button>}
-          extra={<Tooltip title='More'>
-            <Link to='/sectors'><MoreOutlined /></Link>
-          </Tooltip>}
-          hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
-        >
-          {Object.keys(sectorsSummary.data).map((key: string) => {
-            return (
-              <div className='oh-my-fil-home-card-item' key={key}>
-                <div>{key}:</div>
-                <div>{sectorsSummary.data[key]}</div>
-              </div>
-            )
-          })}
-        </Card>
-      </Spin>
-
-      <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerPower}>Miner Power</Button>}
-        extra={sectorCount.status === 'loading' || minerRecoveries.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
-        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
-      >
-        <Divider plain style={{ margin: '0px' }}>Power:</Divider>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Growth:</div>
-          <div>{bytes((sectorCount.data.Live - sectorCount.data.Active) * actorInfo.data.actorSectorSize)}</div>
-        </div>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Committed:</div>
-          <div>{bytes(sectorCount.data.Live * actorInfo.data.actorSectorSize)}</div>
-        </div>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Proving:</div>
-          <div>{bytes(sectorCount.data.Active * actorInfo.data.actorSectorSize)}</div>
-        </div>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Faulty:</div>
-          <div>{bytes(sectorCount.data.Faulty * actorInfo.data.actorSectorSize)}</div>
-        </div>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Recoveries:</div>
-          <div>{bytes(minerRecoveries.data[0] * actorInfo.data.actorSectorSize)}</div>
-        </div>
-        <Divider plain style={{ margin: '0px' }}>Expected:</Divider>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Win Rate:</div>
-          <div>{winPerDay.toFixed(4)}/day</div>
-        </div>
-      </Card>
-
-      <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickMinerBalance}>Miner Balance</Button>}
-        extra={actorState.status === 'loading' || minerAvailableBalance.status === 'loading' || workerBalance.status === 'loading' ? <Spin size='small' delay={200} /> : ''}
-        hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
-      >
-        <Divider plain style={{ margin: '0px' }}>Miner Balance:</Divider>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Total:</div>
-          <div>{nano2fil(actorState.data.Balance)} FIL</div>
-        </div>
-        <div className='oh-my-fil-home-card-item'>
-          <div>PreCommit:</div>
-          <div>{nano2fil(actorState.data.State.PreCommitDeposits)} FIL</div>
-        </div>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Pledge:</div>
-          <div>{nano2fil(actorState.data.State.InitialPledge)} FIL</div>
-        </div>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Vesting:</div>
-          <div>{nano2fil(actorState.data.State.LockedFunds)} FIL</div>
-        </div>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Available:</div>
-          <div>{nano2fil(minerAvailableBalance.data)} FIL</div>
-        </div>
-        <Divider plain style={{ margin: '0px' }}>Worker Balance:</Divider>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Owner:</div>
-          <div>{nano2fil(workerBalance.data.owner)} FIL</div>
-        </div>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Worker:</div>
-          <div>{nano2fil(workerBalance.data.worker)} FIL</div>
-        </div>
-        <div className='oh-my-fil-home-card-item'>
-          <div>Control:</div>
-          <div>{nano2fil(workerBalance.data.control)} FIL</div>
-        </div>
-      </Card>
-
-      <Spin
-        size='large' delay={200}
-        spinning={workerJobs.status === 'loading' ? true : false}
-      >
-        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickTasksCount}>Tasks Count</Button>}
-          extra={<Tooltip title='More'>
-            <Link to='/jobs'><MoreOutlined /></Link>
-          </Tooltip>}
-          hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
-        >
-          {Object.keys(taskCount).map((key: string) => {
-            return (
-              <div className='oh-my-fil-home-card-item' key={key}>
-                <div>{key}:</div>
-                <div>{taskCount[key]}</div>
-              </div>
-            )
-          })}
-        </Card>
-      </Spin>
-
-      <Spin
-        size='large' delay={200}
-        spinning={workerStat.status === 'loading' ? true : false}
-      >
-        <Card title={<Tooltip title='这里不要频繁刷新，关联调度程序锁会导致卡很久'>
-          <Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickWorkerCount}>Worker Count</Button>
-          <WarningOutlined />
-        </Tooltip>}
-          extra={<Tooltip title='More'>
-            <Link to='/workers'><MoreOutlined /></Link>
-          </Tooltip>}
-          hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
-        >
-          {Object.keys(workerCount).map((key: string) => {
-            return (
-              <div className='oh-my-fil-home-card-item' key={key}>
-                <div>{key}:</div>
-                <div>{workerCount[key]}</div>
-              </div>
-            )
-          })}
-        </Card>
-      </Spin>
-
-      <Spin
-        size='large' delay={200}
-        spinning={autoPledgeInfo.status==='loading'?true:false}
-      >
-        <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickAutoPledge}>Auto Pledge</Button>}
-          hoverable={true} bordered={false} size='small' className='oh-my-fil-home-card'
-        >
-          <div className='oh-my-fil-home-card-item' key='status'>
-            <div>Enable:</div>
-            <div><Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} checked={autoPledgeInfo.data.enable} onChange={handleChangeAutoPlageStatus} /></div>
-          </div>
-          <div className='oh-my-fil-home-card-item' key='time'>
-            <div>Time:</div>
-            <div>
-              <Input size='small' type='number' value={autopledgeTime}
-                onChange={handleChanheAutoPledgeSettime}
-                onPressEnter={handlePressEnterAutoPledgeSettime}
-                style={{ textAlign: 'right', width: '80px', backgroundColor: 'transparent', borderRadius: '10px' }}
-              /> Seconds
-            </div>
-          </div>
-          <Button type='default' shape='round' size='small' style={{ width: '100%', marginTop: '10px' }} onClick={handleClickPledgeOneSector} >Pledge One Sector</Button>
-        </Card>
-      </Spin>
+      {cards.map((card, i) => renderCard(card, i))}
     </div>
   );
 };

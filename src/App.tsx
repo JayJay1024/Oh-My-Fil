@@ -13,6 +13,10 @@ import {
   Link
 } from "react-router-dom";
 
+// React DnD
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
 // Companents
 import Home from './companents/Home';
 import Jobs from './companents/Jobs';
@@ -173,7 +177,9 @@ const App: FC = () => {
               <Sectors />
             </Route>
             <Route path='/'>
-              <Home></Home>
+              <DndProvider backend={HTML5Backend}>
+                <Home />
+              </DndProvider>
             </Route>
           </Switch>
         </Content>
