@@ -140,12 +140,12 @@ const App: FC = () => {
       <Router>
         <Header className='oh-my-fil-header'>
           <Menu theme='light' mode='horizontal' onClick={handleClickMenu} defaultSelectedKeys={['home']}>
-            <Menu.Item key='home'><Link to="/">Home</Link></Menu.Item>
-            <Menu.Item key='jobs'><Link to="/jobs">Jobs</Link></Menu.Item>
-            <Menu.Item key='proving'><Link to="/proving">Proving</Link></Menu.Item>
-            <Menu.Item key='workers'><Link to="/workers">Workers</Link></Menu.Item>
-            <Menu.Item key='storages'><Link to="/storages">Storages</Link></Menu.Item>
-            <Menu.Item key='sectors'><Link to="/sectors">Sectors</Link></Menu.Item>
+            <Menu.Item key='home'><Link to="/ohmyfil">Home</Link></Menu.Item>
+            <Menu.Item key='jobs'><Link to="/ohmyfil/jobs">Jobs</Link></Menu.Item>
+            <Menu.Item key='proving'><Link to="/ohmyfil/proving">Proving</Link></Menu.Item>
+            <Menu.Item key='workers'><Link to="/ohmyfil/workers">Workers</Link></Menu.Item>
+            <Menu.Item key='storages'><Link to="/ohmyfil/storages">Storages</Link></Menu.Item>
+            <Menu.Item key='sectors'><Link to="/ohmyfil/sectors">Sectors</Link></Menu.Item>
           </Menu>
           <Divider type='vertical' style={{ height: '60%' }} />
           <Divider type='vertical' style={{ height: '60%' }} />
@@ -161,22 +161,22 @@ const App: FC = () => {
         </Header>
         <Content className='oh-my-fil-content'>
           <Switch>
-            <Route path='/workers'>
+            <Route path='/ohmyfil/workers/'>
               <Workers />
             </Route>
-            <Route path='/proving'>
+            <Route path='/ohmyfil/proving/'>
               <Proving />
             </Route>
-            <Route path='/jobs'>
+            <Route path='/ohmyfil/jobs/'>
               <Jobs />
             </Route>
-            <Route path='/storages'>
+            <Route path='/ohmyfil/storages/'>
               <Storage />
             </Route>
-            <Route path='/sectors'>
+            <Route path='/ohmyfil/sectors/'>
               <Sectors />
             </Route>
-            <Route path='/'>
+            <Route path='/ohmyfil/'>
               <DndProvider backend={HTML5Backend}>
                 <Home />
               </DndProvider>

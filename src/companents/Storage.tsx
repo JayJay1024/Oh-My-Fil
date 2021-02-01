@@ -9,7 +9,7 @@ const Storage: FC = () => {
         title="敬请期待~"
         extra={
           <Button type="primary" key="home">
-            <Link to='/home'>Home</Link>
+            <Link to='/ohmyfil'>Home</Link>
           </Button>
         }
       />,
