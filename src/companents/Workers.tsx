@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Antd
-import { ReloadOutlined, SearchOutlined, WarningOutlined } from '@ant-design/icons';
-import { PageHeader, Descriptions, Badge, Typography, Select, Button, Spin, Tooltip } from 'antd';
+import { ReloadOutlined, SearchOutlined } from '@ant-design/icons';
+import { PageHeader, Descriptions, Badge, Typography, Select, Button, Spin } from 'antd';
 
 // Reducers
 import { selectConnectInfo } from '../reducers/connectInfoSlice';
@@ -34,7 +34,7 @@ const Worker: FC = () => {
             </Select>,
             <Button icon={<SearchOutlined />}>Search</Button>,
             <Button type='primary' icon={<ReloadOutlined />} onClick={() => dispatch(fetchWorkerStat(connectInfo))}>
-              <Tooltip title='这里不要频繁刷新，关联调度程序锁会导致卡很久'>Refresh <WarningOutlined /></Tooltip>
+              Refresh
             </Button>
            
           ]}

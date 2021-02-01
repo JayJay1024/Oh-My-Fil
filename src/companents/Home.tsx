@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Antd
 import { Card, Divider, Button, Spin, Tooltip, Switch, Input, message } from "antd";
-import { ReloadOutlined, MoreOutlined, WarningOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { ReloadOutlined, MoreOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
 import '../App.less';
 import DnDCard from './DnDCard';
@@ -343,10 +343,7 @@ const Home: FC = () => {
       size='large' delay={200}
       spinning={workerStat.status === 'loading' ? true : false}
     >
-      <Card title={<Tooltip title='这里不要频繁刷新，关联调度程序锁会导致卡很久'>
-        <Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickWorkerCount}>Worker Count</Button>
-        <WarningOutlined />
-      </Tooltip>}
+      <Card title={<Button type='ghost' icon={<ReloadOutlined />} style={{ border: 'none' }} onClick={handleClickWorkerCount}>Worker Count</Button>}
         extra={<Tooltip title='More'>
           <Link to='/workers'><MoreOutlined /></Link>
         </Tooltip>}
