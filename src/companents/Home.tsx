@@ -130,6 +130,15 @@ const Home: FC = () => {
     dispatch(fetchAutoPledgeInfo(connectInfo));
   }
 
+  const handleClickRefreshAll = () => {
+    handleClickSectorsSummary();
+    handleClickMinerPower();
+    handleClickMinerBalance();
+    handleClickTasksCount();
+    handleClickWorkerCount();
+    handleClickAutoPledge();
+  }
+
   const handleChangeAutoPlageStatus = (cheched: boolean) => {
     if (actorAddress.length === 0) {
       message.warning('Connect Firstly ~');
@@ -219,6 +228,9 @@ const Home: FC = () => {
 
   return (
     <div className='oh-my-fil-home-content'>
+      <div style={{ width: '100%', margin: '5px' }}>
+        <Button type='primary' icon={<ReloadOutlined />} shape='round' style={{ width: '100%' }} onClick={handleClickRefreshAll} >Refresh All</Button>
+      </div>
       <Spin
         size='large' delay={200}
         spinning={sectorsSummary.status === 'loading' ? true : false}
