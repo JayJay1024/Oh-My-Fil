@@ -247,7 +247,7 @@ const Home: FC = () => {
         <Divider plain style={{ margin: '0px' }}>Power:</Divider>
         <div className='oh-my-fil-home-card-item'>
           <div>Growth:</div>
-          <div>{bytes((sectorCount.data.Live - sectorCount.data.Active) * actorInfo.data.actorSectorSize)}</div>
+          <div>{bytes((sectorCount.data.Live - sectorCount.data.Active - sectorCount.data.Faulty) * actorInfo.data.actorSectorSize)}</div>
         </div>
         <div className='oh-my-fil-home-card-item'>
           <div>Committed:</div>
