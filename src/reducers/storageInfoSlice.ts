@@ -83,7 +83,7 @@ const slice = createSlice({
       state.status = 'loading';
     });
     builder.addCase(fetchStorageInfo.rejected, (state, action) => {
-      state.status = 'loading';
+      state.status = 'failed';
       state.error = action.error.message || 'Something Error ...';
     });
     builder.addCase(fetchStorageInfo.fulfilled, (state, action) => {
