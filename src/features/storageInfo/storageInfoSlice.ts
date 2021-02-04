@@ -40,31 +40,37 @@ const initialState = {
 
 interface fetchParams {
   connectInfo: ConnectInfoState,
-  storageId: string
+  storageIds: string[]
 }
 
 const fetchStorageInfo = createAsyncThunk(
-  'storage/stat',
+  'storage/info',
   async (params: fetchParams) => {
-    return new Promise<StorageInfoState>((resolve, rejects) => {
-      const nodeMiner = new Client(`ws://${params.connectInfo.minerApi}/rpc/v0?token=${params.connectInfo.minerToken}`);
-
-      nodeMiner.on('error', async (err) => {
-        rejects(err);
-      });
-      nodeMiner.on('close', () => { });
-
-      nodeMiner.on("open", async () => {
-        try {
-          const storageInfo = await nodeMiner.call('Filecoin.StorageInfo', [ params.storageId ]) as StorageInfoState;
-          resolve(storageInfo);
-        } catch (err) {
-          rejects(err);
-        } finally {
-          nodeMiner.close();
-        }
-      });
+    const promises: Promise<StorageInfoState>[] = [];
+    params.storageIds.forEach(storageId => {
+      promises.push(
+        new Promise<StorageInfoState>((resolve, rejects) => {
+          const nodeMiner = new Client(`ws://${params.connectInfo.minerApi}/rpc/v0?token=${params.connectInfo.minerToken}`);
+    
+          nodeMiner.on('error', async (err) => {
+            rejects(err);
+          });
+          nodeMiner.on('close', () => { });
+    
+          nodeMiner.on("open", async () => {
+            try {
+              const storageInfo = await nodeMiner.call('Filecoin.StorageInfo', [ storageId ]) as StorageInfoState;
+              resolve(storageInfo);
+            } catch (err) {
+              rejects(err);
+            } finally {
+              nodeMiner.close();
+            }
+          });
+        })
+      )
     });
+    return Promise.allSettled(promises);
   }
 );
 
@@ -88,7 +94,12 @@ const slice = createSlice({
     });
     builder.addCase(fetchStorageInfo.fulfilled, (state, action) => {
       state.status = 'succeeded';
-      state.data[action.payload.ID] = action.payload;
+      state.data = {};
+      action.payload.forEach(storage => {
+        if (storage.status === 'fulfilled') {
+          state.data[storage.value.ID] = storage.value;
+        }
+      });
     });
   }
 });

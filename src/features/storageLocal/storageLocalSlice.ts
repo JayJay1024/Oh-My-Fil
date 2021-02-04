@@ -4,7 +4,9 @@ import { Client } from 'rpc-websockets';
 import { RootState } from '../../index';
 import { ConnectInfoState } from '../connectInfo/connectInfoSlice';
 
-type StorageLocalState = object;
+interface StorageLocalState {
+  [index: string]: string
+};
 export interface FetchStorageLocalState {
   data: StorageLocalState,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',

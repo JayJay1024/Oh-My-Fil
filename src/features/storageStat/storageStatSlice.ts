@@ -32,34 +32,40 @@ const initialState = {
 
 interface fetchParams {
   connectInfo: ConnectInfoState,
-  storageId: string
+  storageIds: string[]
 }
 
 const fetchStorageStat = createAsyncThunk(
   'storage/stat',
   async (params: fetchParams) => {
-    return new Promise<StorageStatWithIDState>((resolve, rejects) => {
-      const nodeMiner = new Client(`ws://${params.connectInfo.minerApi}/rpc/v0?token=${params.connectInfo.minerToken}`);
-
-      nodeMiner.on('error', async (err) => {
-        rejects(err);
-      });
-      nodeMiner.on('close', () => { });
-
-      nodeMiner.on("open", async () => {
-        try {
-          const storageStat = await nodeMiner.call('Filecoin.StorageStat', [ params.storageId ]) as StorageStatState;
-          const storageStatWithID = {
-            [params.storageId]: storageStat
-          }
-          resolve(storageStatWithID);
-        } catch (err) {
-          rejects(err);
-        } finally {
-          nodeMiner.close();
-        }
-      });
+    const promises: Promise<StorageStatWithIDState>[] = [];
+    params.storageIds.forEach(storageId => {
+      promises.push(
+        new Promise<StorageStatWithIDState>((resolve, rejects) => {
+          const nodeMiner = new Client(`ws://${params.connectInfo.minerApi}/rpc/v0?token=${params.connectInfo.minerToken}`);
+    
+          nodeMiner.on('error', async (err) => {
+            rejects(err);
+          });
+          nodeMiner.on('close', () => { });
+    
+          nodeMiner.on("open", async () => {
+            try {
+              const storageStat = await nodeMiner.call('Filecoin.StorageStat', [ storageId ]) as StorageStatState;
+              const storageStatWithID = {
+                [storageId]: storageStat
+              }
+              resolve(storageStatWithID);
+            } catch (err) {
+              rejects(err);
+            } finally {
+              nodeMiner.close();
+            }
+          });
+        })
+      )
     });
+    return Promise.allSettled(promises);
   }
 );
 
@@ -83,8 +89,13 @@ const slice = createSlice({
     });
     builder.addCase(fetchStorageStat.fulfilled, (state, action) => {
       state.status = 'succeeded';
-      const key = Object.keys(action.payload)[0];
-      state.data[key] = action.payload[key];
+      state.data = {};
+      action.payload.forEach(storage => {
+        if (storage.status === 'fulfilled') {
+          const key = Object.keys(storage.value)[0];
+          state.data[key] = storage.value[key];
+        }
+      });
     });
   }
 });

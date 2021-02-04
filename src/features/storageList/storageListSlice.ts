@@ -4,8 +4,14 @@ import { Client } from 'rpc-websockets';
 import { RootState } from '../../index';
 import { ConnectInfoState } from '../connectInfo/connectInfoSlice';
 
+interface StorageListSectorsState {
+  Miner: number,
+  Number: number,
+  SectorFileType: number
+}
+
 interface StorageListState {
-  [index: string]: any
+  [index: string]: StorageListSectorsState[]
 }
 export interface FetchStorageListState {
   data: StorageListState,
