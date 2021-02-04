@@ -361,7 +361,7 @@ const initialState = {
   error: null,
 } as FetchStorageListState;
 
-const fetStorageList = createAsyncThunk(
+const fetchStorageList = createAsyncThunk(
   'storage/list',
   async (connectInfo: ConnectInfoState) => {
     return new Promise<StorageListState>((resolve, rejects) => {
@@ -391,21 +391,21 @@ const slice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(fetStorageList.pending, (state) => {
+    builder.addCase(fetchStorageList.pending, (state) => {
       state.status = 'loading';
     });
-    builder.addCase(fetStorageList.rejected, (state, action) => {
+    builder.addCase(fetchStorageList.rejected, (state, action) => {
       state.status = 'loading';
       state.error = action.error.message || 'Something Error ...';
     });
-    builder.addCase(fetStorageList.fulfilled, (state, action) => {
+    builder.addCase(fetchStorageList.fulfilled, (state, action) => {
       state.status = 'succeeded';
       state.data = action.payload;
     });
   }
 });
 
-export { fetStorageList };
+export { fetchStorageList };
 export const selectStorageList = (state: RootState) => state.storageList;
 
 export default slice.reducer;
