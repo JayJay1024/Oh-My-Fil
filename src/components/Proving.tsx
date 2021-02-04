@@ -8,11 +8,11 @@ import { PageHeader, Table, Button, Spin } from 'antd';
 import { ReloadOutlined, SyncOutlined, ClockCircleOutlined } from '@ant-design/icons';
 
 // Reducers
-import { selectActorInfo } from '../reducers/actorInfoSlice';
-import { selectConnectInfo } from '../reducers/connectInfoSlice';
-import { fetchMinerDeadlines, selectMinerDeadlines } from '../reducers/minerDeadlinesSlice';
-import { fetchProvingDeadline, selectProvingDeadline } from '../reducers/provingDeadlineSlice';
-import { fetchDeadlinesPartitions, selectDeadlinesPartitions } from '../reducers/deadlinesPartitionsSlice';
+import { selectActorInfo } from '../features/actorInfo/actorInfoSlice';
+import { selectConnectInfo } from '../features/connectInfo/connectInfoSlice';
+import { fetchMinerDeadlines, selectMinerDeadlines } from '../features/minerDeadlines/minerDeadlinesSlice';
+import { fetchProvingDeadline, selectProvingDeadline } from '../features/provingDeadlines/provingDeadlineSlice';
+import { fetchDeadlinesPartitions, selectDeadlinesPartitions } from '../features/deadlinesPartitions/deadlinesPartitionsSlice';
 
 import '../App.less';
 import { bitCount } from '../utility';
@@ -66,14 +66,14 @@ const Proving: FC = () => {
   }];
 
   const deadlinesTableData: DeadlinesTableDataState[] = [];
-  minerDeadlines.data.forEach((deadline, dIdx) => {
+  minerDeadlines.data.forEach((deadline: any, dIdx: number) => {
     const partitions = deadlinesPartitions.data[dIdx] || [];
     const provenPartitions = bitCount(deadline.PostSubmissions);
 
     let faults: number = 0;
     let sectors: number = 0;
 
-    partitions.forEach((partition) => {
+    partitions.forEach((partition: any) => {
       faults += bitCount(partition.FaultySectors);
       sectors += bitCount(partition.AllSectors);
     });

@@ -11,18 +11,18 @@ import { taskShortName } from '../utility';
 import { Link } from 'react-router-dom';
 
 // Reducers
-import { selectConnectInfo } from '../reducers/connectInfoSlice';
-import { selectActorInfo } from '../reducers/actorInfoSlice';
-import { fetchSectorsSummary, selectSectorsSummary } from '../reducers/sectorsSummarySlice';
-import { fetchSectorCount, selectSectorCount } from '../reducers/sectorCountSlice';
-import { fetchMinerRecoveries, selectMinerRecoveries } from '../reducers/minerRecoveriesSlice';
-import { fetchMinerAvailableBalance, selectMinerAvailableBalance } from '../reducers/minerAvailableBalanceSlice';
-import { fetchActorState, selectActorState } from '../reducers/actorStateSlice';
-import { fetchWorkerBalance, selectWorkerBalance, WorkerAddress } from '../reducers/workerBalanceSlice';
-import { selectMinerInfo } from '../reducers/minerInfoSlice';
-import { fetchActorPower, selectActorPower } from '../reducers/actorPowerSlice';
-import { fetchWorkerJobs, selectWorkerJobs } from '../reducers/workerJobsSlice';
-import { fetchWorkerStat, selectWorkerStat } from '../reducers/workerStatSlice';
+import { selectConnectInfo } from '../features/connectInfo/connectInfoSlice';
+import { selectActorInfo } from '../features/actorInfo/actorInfoSlice';
+import { fetchSectorsSummary, selectSectorsSummary } from '../features/sectorsSummary/sectorsSummarySlice';
+import { fetchSectorCount, selectSectorCount } from '../features/sectorsCount/sectorsCountSlice';
+import { fetchMinerRecoveries, selectMinerRecoveries } from '../features/minerRecoveries/minerRecoveriesSlice';
+import { fetchMinerAvailableBalance, selectMinerAvailableBalance } from '../features/minerAvailableBalance/minerAvailableBalanceSlice';
+import { fetchActorState, selectActorState } from '../features/actorState/actorStateSlice';
+import { fetchWorkerBalance, selectWorkerBalance, WorkerAddress } from '../features/workerBalance/workerBalanceSlice';
+import { selectMinerInfo } from '../features/minerInfo/minerInfoSlice';
+import { fetchActorPower, selectActorPower } from '../features/actorPower/actorPowerSlice';
+import { fetchWorkerJobs, selectWorkerJobs } from '../features/workerJobs/workerJobsSlice';
+import { fetchWorkerStat, selectWorkerStat } from '../features/workerStat/workerStatSlice';
 import {
   fetchAutoPledgeInfo,
   enableAutoPledge,
@@ -30,7 +30,7 @@ import {
   settimeAutoPledge,
   selectAutoPledgeInfo,
   pledgeOneSector,
-} from '../reducers/autoPledgeSlice';
+} from '../features/autoPledge/autoPledgeSlice';
 
 export interface CardItem {
   id: number

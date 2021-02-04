@@ -8,9 +8,9 @@ import { PageHeader, Table, Button, Spin } from 'antd';
 import { ReloadOutlined } from '@ant-design/icons';
 
 // Reducers
-import { selectWorkerStat } from '../reducers/workerStatSlice';
-import { selectConnectInfo } from '../reducers/connectInfoSlice';
-import { fetchWorkerJobs, selectWorkerJobs, WorkerJobsState } from '../reducers/workerJobsSlice';
+import { selectWorkerStat } from '../features/workerStat/workerStatSlice';
+import { selectConnectInfo } from '../features/connectInfo/connectInfoSlice';
+import { fetchWorkerJobs, selectWorkerJobs, WorkerJobsState } from '../features/workerJobs/workerJobsSlice';
 
 import '../App.less';
 import prettyMs from 'pretty-ms';
@@ -46,7 +46,7 @@ const Proving: FC = () => {
   const lines: LineState[] = [];
   Object.keys(workersJobs.data).forEach((wid: string) => {
     const jobs = workersJobs.data[wid];
-    jobs.forEach((job) => {
+    jobs.forEach((job: any) => {
       lines.push({
         job: job,
         wid: wid

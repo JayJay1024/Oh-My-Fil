@@ -32,28 +32,28 @@ import {
   updateLotusToken,
   updateMinerToken,
   selectConnectInfo,
-} from './reducers/connectInfoSlice';
-import { fetchActorInfo, selectActorInfo } from './reducers/actorInfoSlice';
-import { selectActorPower } from './reducers/actorPowerSlice';
-import { selectActorState } from './reducers/actorStateSlice';
-import { selectDeadlinesPartitions } from './reducers/deadlinesPartitionsSlice';
-import { selectMinerAvailableBalance } from './reducers/minerAvailableBalanceSlice';
-import { selectMinerDeadlines } from './reducers/minerDeadlinesSlice';
-import { selectMinerFaults } from './reducers/minerFaultsSlice';
-import { fetchMinerInfo, selectMinerInfo } from './reducers/minerInfoSlice';
-import { selectMinerRecoveries } from './reducers/minerRecoveriesSlice';
-import { selectProvingDeadline } from './reducers/provingDeadlineSlice';
-import { selectSectorCount } from './reducers/sectorCountSlice';
-import { selectSectorsListInStates } from './reducers/sectorsListInStatesSlice';
-import { selectSectorsSummary } from './reducers/sectorsSummarySlice';
-import { selectStorageInfo } from './reducers/storageInfoSlice';
-import { selectStorageList } from './reducers/storageListSlice';
-import { selectStorageLocal } from './reducers/storageLocalSlice';
-import { selectStorageStat } from './reducers/storageStatSlice';
-import { selectWorkerBalance } from './reducers/workerBalanceSlice';
-import { selectWorkerJobs } from './reducers/workerJobsSlice';
-import { selectWorkerStat } from './reducers/workerStatSlice';
-import { selectAutoPledgeInfo } from './reducers/autoPledgeSlice';
+} from './features/connectInfo/connectInfoSlice';
+import { fetchActorInfo, selectActorInfo } from './features/actorInfo/actorInfoSlice';
+import { selectActorPower } from './features/actorPower/actorPowerSlice';
+import { selectActorState } from './features/actorState/actorStateSlice';
+import { selectDeadlinesPartitions } from './features/deadlinesPartitions/deadlinesPartitionsSlice';
+import { selectMinerAvailableBalance } from './features/minerAvailableBalance/minerAvailableBalanceSlice';
+import { selectMinerDeadlines } from './features/minerDeadlines/minerDeadlinesSlice';
+import { selectMinerFaults } from './features/minerFaults/minerFaultsSlice';
+import { fetchMinerInfo, selectMinerInfo } from './features/minerInfo/minerInfoSlice';
+import { selectMinerRecoveries } from './features/minerRecoveries/minerRecoveriesSlice';
+import { selectProvingDeadline } from './features/provingDeadlines/provingDeadlineSlice';
+import { selectSectorCount } from './features/sectorsCount/sectorsCountSlice';
+import { selectSectorsListInStates } from './features/sectorsListInState/sectorsListInStatesSlice';
+import { selectSectorsSummary } from './features/sectorsSummary/sectorsSummarySlice';
+import { selectStorageInfo } from './features/storageInfo/storageInfoSlice';
+import { selectStorageList } from './features/storageList/storageListSlice';
+import { selectStorageLocal } from './features/storageLocal/storageLocalSlice';
+import { selectStorageStat } from './features/storageStat/storageStatSlice';
+import { selectWorkerBalance } from './features/workerBalance/workerBalanceSlice';
+import { selectWorkerJobs } from './features/workerJobs/workerJobsSlice';
+import { selectWorkerStat } from './features/workerStat/workerStatSlice';
+import { selectAutoPledgeInfo } from './features/autoPledge/autoPledgeSlice';
 
 const { Header, Content, Footer } = Layout;
 

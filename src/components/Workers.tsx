@@ -6,8 +6,8 @@ import { ReloadOutlined, SearchOutlined } from '@ant-design/icons';
 import { PageHeader, Descriptions, Badge, Typography, Select, Button, Spin } from 'antd';
 
 // Reducers
-import { selectConnectInfo } from '../reducers/connectInfoSlice';
-import { fetchWorkerStat, selectWorkerStat } from '../reducers/workerStatSlice';
+import { selectConnectInfo } from '../features/connectInfo/connectInfoSlice';
+import { fetchWorkerStat, selectWorkerStat } from '../features/workerStat/workerStatSlice';
 
 import '../App.less';
 import bytes from 'bytes';

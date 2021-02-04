@@ -1,30 +1,30 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 // miner api
-import actorInfoReducer from './reducers/actorInfoSlice';
-import connectInfoReducer from './reducers/connectInfoSlice';
-import sectorsSummaryReducer from './reducers/sectorsSummarySlice';
-import sectorsListInStatesReducer from './reducers/sectorsListInStatesSlice';
-import storageLocalReducer from './reducers/storageLocalSlice';
-import storageStatReducer from './reducers/storageStatSlice';
-import storageInfoReducer from './reducers/storageInfoSlice';
-import workerStatReducer from './reducers/workerStatSlice';
-import workerJobsReducer from './reducers/workerJobsSlice';
-import storageListReducer from './reducers/storageListSlice';
-import autopledgeReducer from './reducers/autoPledgeSlice';
+import actorInfoReducer from './features/actorInfo/actorInfoSlice';
+import connectInfoReducer from './features/connectInfo/connectInfoSlice';
+import sectorsSummaryReducer from './features/sectorsSummary/sectorsSummarySlice';
+import sectorsListInStatesReducer from './features/sectorsListInState/sectorsListInStatesSlice';
+import storageLocalReducer from './features/storageLocal/storageLocalSlice';
+import storageStatReducer from './features/storageStat/storageStatSlice';
+import storageInfoReducer from './features/storageInfo/storageInfoSlice';
+import workerStatReducer from './features/workerStat/workerStatSlice';
+import workerJobsReducer from './features/workerJobs/workerJobsSlice';
+import storageListReducer from './features/storageList/storageListSlice';
+import autopledgeReducer from './features/autoPledge/autoPledgeSlice';
 
 // lotus api
-import actorPowerReducer from './reducers/actorPowerSlice';
-import minerFaultsReducer from './reducers/minerFaultsSlice';
-import minerAvailableBalanceReducer from './reducers/minerAvailableBalanceSlice';
-import sectorCountReducer from './reducers/sectorCountSlice';
-import minerRecoveriesReducer from './reducers/minerRecoveriesSlice';
-import actorStateReducer from './reducers/actorStateSlice';
-import minerInfoReducer from './reducers/minerInfoSlice';
-import workerBalanceReducer from './reducers/workerBalanceSlice';
-import provingDeadlineReducer from './reducers/provingDeadlineSlice';
-import minerDeadlinesReducer from './reducers/minerDeadlinesSlice';
-import deadlinesPartitionReducer from './reducers/deadlinesPartitionsSlice';
+import actorPowerReducer from './features/actorPower/actorPowerSlice';
+import minerFaultsReducer from './features/minerFaults/minerFaultsSlice';
+import minerAvailableBalanceReducer from './features/minerAvailableBalance/minerAvailableBalanceSlice';
+import sectorCountReducer from './features/sectorsCount/sectorsCountSlice';
+import minerRecoveriesReducer from './features/minerRecoveries/minerRecoveriesSlice';
+import actorStateReducer from './features/actorState/actorStateSlice';
+import minerInfoReducer from './features/minerInfo/minerInfoSlice';
+import workerBalanceReducer from './features/workerBalance/workerBalanceSlice';
+import provingDeadlineReducer from './features/provingDeadlines/provingDeadlineSlice';
+import minerDeadlinesReducer from './features/minerDeadlines/minerDeadlinesSlice';
+import deadlinesPartitionReducer from './features/deadlinesPartitions/deadlinesPartitionsSlice';
 
 export default configureStore({
   reducer: {
