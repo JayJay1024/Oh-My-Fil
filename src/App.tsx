@@ -18,12 +18,12 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 // Companents
-import Home from './companents/Home';
-import Jobs from './companents/Jobs';
-import Workers from './companents/Workers';
-import Proving from './companents/Proving';
-import Sectors from './companents/Sectors';
-import Storage from './companents/Storage';
+import Home from './components/Home';
+import Jobs from './components/Jobs';
+import Workers from './components/Workers';
+import Proving from './components/Proving';
+import Sectors from './components/Sectors';
+import Storage from './components/Storage';
 
 // Reducers
 import {
