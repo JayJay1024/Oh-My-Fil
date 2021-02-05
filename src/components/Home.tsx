@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Antd
-import { Card, Divider, Button, Spin, Tooltip, Switch, Input, message } from "antd";
+import { Card, Divider, Button, Spin, Tooltip, Switch, Input, Typography, message } from "antd";
 import { ReloadOutlined, MoreOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
 import '../App.less';
@@ -58,6 +58,7 @@ const Home: FC = () => {
 
   const dispatch = useDispatch()
   const actorAddress = actorInfo.data.actorAddress;
+  const [powerday, setPowerday] = useState<number>(0);
   const [havePledgeUpdate, setHavePledgeUpdate] = useState<boolean>(false);
   const [autopledgeTime, setAutoPledgeTime] = useState<number>(autoPledgeInfo.data.time);
 
@@ -388,6 +389,22 @@ const Home: FC = () => {
           </div>
           </div>
           <Button type='default' shape='round' size='small' style={{ width: '100%', marginTop: '10px' }} onClick={handleClickPledgeOneSector} >Pledge One Sector</Button>
+          <Divider plain style={{ margin: '5px 0' }}>Time Estimator:</Divider>
+          <div className='oh-my-fil-home-card-item' key='powerday' >
+            <div>Power/Day:</div>
+            <div>
+              <Input size='small' type='number' value={powerday}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPowerday(Number(e.target.value))}
+                style={{ textAlign: 'right', width: '80px', backgroundColor: 'transparent', borderRadius: '10px' }}
+              /> TiB
+            </div>
+          </div>
+          <div className='oh-my-fil-home-card-item' key='estimatortime' >
+            <div>Estimate Time(s):</div>
+            <div>
+              {powerday>0&&actorInfo.status==='succeeded'?<Typography.Text copyable>{(24*3600/(powerday*1024*1024*1024*1024/actorInfo.data.actorSectorSize)).toFixed(0)}</Typography.Text>:<span>N/A</span>}
+            </div>
+          </div>
         </Card>
       </Spin>
     </div>
