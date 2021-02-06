@@ -132,6 +132,10 @@ const Home: FC = () => {
   }
 
   const handleClickRefreshAll = () => {
+    if (actorInfo.status !== 'succeeded' || actorAddress.length === 0) {
+      message.warning('Connect Firstly ~');
+      return;
+    }
     handleClickSectorsSummary();
     handleClickMinerPower();
     handleClickMinerBalance();
